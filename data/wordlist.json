@@ -1,0 +1,58 @@
+[
+  {
+    "GUID": "bd5e45ba-37f4-496e-b823-73960782bbe7",
+    "english": "language",
+    "german": "Sprache",
+    "spanish": "idioma",
+    "french": "Langue"
+  },
+  {
+    "GUID": "b4c34d64-28dc-461b-b133-f4ebfa618cad",
+    "english": "Time",
+    "german": "Zeit",
+    "spanish": "hora",
+    "french": "temps"
+  },
+  {
+    "GUID": "7fee9ce6-6728-41ec-9c2b-784839f47f5f",
+    "english": "January",
+    "german": "Januar",
+    "spanish": "enero",
+    "french": "eau"
+  },
+  {
+    "GUID": "d9a6009b-f7e5-436d-9ab9-018709399b2a",
+    "english": "language",
+    "german": "Übersetzer",
+    "spanish": "traductor",
+    "french": "traducteur"
+  },
+  {
+    "GUID": "039fa5cb-79d3-4be3-8bc6-c5cdbbd38071",
+    "english": "water",
+    "german": "Wasser",
+    "spanish": "aqua",
+    "french": "eau"
+  },
+  {
+    "GUID": "0f553fae-f3a4-44df-ad65-d73ca8f53c53",
+    "english": "fire",
+    "german": "Feuer",
+    "spanish": "fuego",
+    "french": "feu"
+  },
+  {
+    "GUID": "a7dd6bd7-107b-4e45-9e70-f6ff51cd3512",
+    "english": "boy",
+    "german": "Junge",
+    "spanish": "garçon",
+    "french": "niño"
+  },
+  {
+    "GUID": "91d1e436-79bc-49ff-8fb0-f7f5dd283921",
+    "english": "girl",
+    "german": "Mädchen",
+    "spanish": "niño",
+    "french": "fille"
+  }
+]
