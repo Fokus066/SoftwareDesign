@@ -9,13 +9,6 @@ export class FileHandler
 
    }
 
-  private readFile(pathToFile: string) : any 
-  {
-    let jsonRaw = fs.readFileSync(path.resolve(__dirname, '../'+pathToFile));
-    let json : any = JSON.parse(jsonRaw.toString());
-    return json;
-  }
-
   public readJSON(pathToFile: string) : any 
   {
     let jsonRaw = fs.readFileSync(path.resolve(__dirname, '../'+pathToFile));
@@ -25,12 +18,12 @@ export class FileHandler
 
   public readArrayFile(pathToFile: string) : Array<any> 
   {
-    return this.readFile(pathToFile);
+    return this.readJSON(pathToFile);
   }
 
   public readObjectFile(pathToFile: string) : any 
   {
-    return this.readFile(pathToFile);
+    return this.readJSON(pathToFile);
   }
 
   public writeFile(pathToFile: string, dataToWrite: any) : void {

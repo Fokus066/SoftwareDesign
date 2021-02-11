@@ -18,7 +18,7 @@
 2. If you have problems with this, check if launch.json and tasks.json are there in .vscode folder of the project
 
 
-Die nächsten Schritte für das Programm:
+## Die nächsten Schritte für das Programm:
 
 - Login für verschiedenen Rollen( User, Übersetzer, Admin) ✔
 - Wörter (gezielt) in gewünschter Sprache übersetzen ✔
