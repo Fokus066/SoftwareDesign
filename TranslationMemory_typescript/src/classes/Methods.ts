@@ -185,8 +185,8 @@ public async setTranslationTranslator() : Promise<void> {
             worddb.showAdminFunctionalities();
         }else
             {
-            worddb.showFunctionalities();
             console.log('\nAdmins Passwort inkorrekt');
+            worddb.showFunctionalities();
             }
         }
         else if (username == TRANSLATOR.translatorname) {
@@ -199,12 +199,13 @@ public async setTranslationTranslator() : Promise<void> {
             worddb.showTranslatorFunctionalities();
             }
             else {
+            console.log('\nÜbersetzers Passwort inkorrekt');
             worddb.showFunctionalities();
-            console.log('\nÜbersetzers Passwort inkorrekt');}
+            }
         } 
         else {
-        worddb.showFunctionalities();
         console.log('\nAdmins Username inkorrekt');
+        worddb.showFunctionalities();
         }
 
     }

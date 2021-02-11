@@ -1,7 +1,7 @@
 import ConsoleHandling from './classes/ConsoleHandling';
-import Methods from '../src/classes/Methods';
+import Methods from './classes/Methods';
 
-export class Worddatabase {
+export class UI {
 
   public async showFunctionalities() : Promise<void> 
   {
