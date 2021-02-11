@@ -16,3 +16,20 @@
 
 1. After installation of the node_modules, you can start debugging in Visual Studio Code via Debug tab on the left site
 2. If you have problems with this, check if launch.json and tasks.json are there in .vscode folder of the project
+
+
+Die nächsten Schritte für das Programm:
+
+- Login für verschiedenen Rollen( User, Übersetzer, Admin) ✔
+- Wörter (gezielt) in gewünschter Sprache übersetzen ✔
+- Nullobject Pattern für "Keine" Antworten ✔
+- Prozentuale Anteil der vorhandenen Übersetzungen vom jeden Wort codieren
+- GUID in json Datei einschreiben ✔
+- neues Wort anlegen ✔
+- neue Sprache anlegen 
+- Berechtigungen für den Übersetzer codieren
+- alle Wörter mit Übersetzungen anzeigen ✔
+- Anzeige einer Liste von der angelegten Wörter codieren 
+- Anzeige einer Liste mit fehlenden Übersetzungen codieren 
+
+
