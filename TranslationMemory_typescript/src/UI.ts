@@ -63,7 +63,7 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      console.log('Neue Sprache zugewiesen');  
+      Methods.AddnewLanguage();  
         break;
       case '2':
       Methods.AdminAccessRightTranslator();  

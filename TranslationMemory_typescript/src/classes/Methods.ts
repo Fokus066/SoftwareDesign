@@ -60,12 +60,19 @@ export class Methods{
 
     public async AddnewLanguage() : Promise<void> {
 
-        /*
         let fileHandler = new FileHandler(); 
         let data = fileHandler.readJSON('../data/wordlist.json');
-        let newLanguage: String = await ConsoleHandling.question('Wort eingeben: ');
-        */
+        let _nullWord : Word = new NullWord();
+        let newLanguage: any = await ConsoleHandling.question('Neue Sprache: ');      
 
+        for(let index = 0; index < this._words.length; index++){
+            
+
+            data[index][newLanguage] = _nullWord.getGermanWord();
+            fileHandler.writeFile('../data/wordlist.json', data)
+        }
+
+        await worddb.showAdminFunctionalities();
         
 
     }
@@ -186,6 +193,8 @@ export class Methods{
         fileHandler.writeFile('../data/new_wordlist.json', data)
         worddb.showFunctionalities;
 
+        await worddb.showWordFunctionalities();
+
     }
 
 
@@ -298,6 +307,8 @@ export class Methods{
 
         let inputword : String = await ConsoleHandling.question('Welches Wort? ');
 
+        
+
         for(let index in this._words){
 
             if (inputword == this._words[index].getGermanWord().toString())
@@ -305,7 +316,7 @@ export class Methods{
             {   let language : String = await ConsoleHandling.question('Welche Sprache? ');
                
                 
-                delete this._words[index];
+                
 
                 switch(language.toLowerCase())
                 {
@@ -313,21 +324,13 @@ export class Methods{
                     case'eng':
                     {                
                          
-                        if (TRANSLATOR.accessspanish == true)
+                        if (TRANSLATOR.accessenglish == true)
                         {
 
                             let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
-                            this._words[index].setEnglishWord(newTranslation); 
-                            let newWord = 
-                                {
-                                    GUID: this._words[index].getGUID().toString(),
-                                    english: newTranslation,
-                                    german: this._words[index].getGermanWord().toString(),
-                                    spanish: this._words[index].getSpanishWord().toString(),
-                                    french: this._words[index].getFrenchWord().toString()
-                                }
 
-                            data.push(newWord);                     
+                                data[index].english = newTranslation;
+                               
                             fileHandler.writeFile('../data/wordlist.json', data)
 
                         }else
@@ -340,21 +343,13 @@ export class Methods{
                     case'spanisch':
                     case'sp': 
                     {
-                        if (TRANSLATOR.accessfrench== true)
+                        if (TRANSLATOR.accessspanish== true)
                         {
 
                             let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
-                            this._words[index].setEnglishWord(newTranslation); 
-                            let newWord = 
-                                {
-                                    GUID: this._words[index].getGUID().toString(),
-                                    english: newTranslation,
-                                    german: this._words[index].getGermanWord().toString(),
-                                    spanish: this._words[index].getSpanishWord().toString(),
-                                    french: this._words[index].getFrenchWord().toString()
-                                }
 
-                            data.push(newWord);                     
+                            data[index].spanish = newTranslation;
+                           
                             fileHandler.writeFile('../data/wordlist.json', data)
 
                         }else
@@ -368,22 +363,14 @@ export class Methods{
                     case'französich':
                     case'f': 
                     {       
-                        if (TRANSLATOR.accessenglish == true)
+                        if (TRANSLATOR.accessfrench == true)
                         {
-
                             let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
-                            this._words[index].setEnglishWord(newTranslation); 
-                            let newWord = 
-                                {
-                                    GUID: this._words[index].getGUID().toString(),
-                                    english: newTranslation,
-                                    german: this._words[index].getGermanWord().toString(),
-                                    spanish: this._words[index].getSpanishWord().toString(),
-                                    french: this._words[index].getFrenchWord().toString()
-                                }
 
-                            data.push(newWord);                     
+                            data[index].french = newTranslation;
+                           
                             fileHandler.writeFile('../data/wordlist.json', data)
+
 
                         }else
                             {
@@ -394,6 +381,8 @@ export class Methods{
                 }
             }
         }
+
+        
 
         this.TranslationCounter();
         worddb.showTranslatorFunctionalities();
@@ -411,11 +400,11 @@ export class Methods{
             if(password == ADMIN.adminpassword){
     
             console.log('\nAnmeldung als Admin erfolgreich!');
-            worddb.showAdminFunctionalities();
+            await worddb.showAdminFunctionalities();
         }else
             {
             console.log('\nAdmins Passwort inkorrekt');
-            worddb.showFunctionalities();
+            await worddb.showFunctionalities();
             }
         }
         else if (username == TRANSLATOR.translatorname) {
@@ -425,16 +414,16 @@ export class Methods{
             if(password == TRANSLATOR.translatorpassword){
         
             console.log('\nAnmeldung als Übersetzer erfolgreich!');
-            worddb.showTranslatorFunctionalities();
+            await worddb.showTranslatorFunctionalities();
             }
             else {
             console.log('\nÜbersetzers Passwort inkorrekt');
-            worddb.showFunctionalities();
+            await worddb.showFunctionalities();
             }
         } 
         else {
         console.log('\nUsername inkorrekt');
-        worddb.showFunctionalities();
+        await worddb.showFunctionalities();
         }
 
     }

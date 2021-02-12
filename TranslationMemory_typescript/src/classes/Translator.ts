@@ -15,7 +15,7 @@ export class Translator extends Admin{
     this._translatorname = translatorname;
     this._translatorpassword =translatorpassword;
     this._accessfrench = false;
-    this._accessenglish = false;
+    this._accessenglish = true;
     this._accessspanish= false;
     
    }
