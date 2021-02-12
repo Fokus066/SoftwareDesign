@@ -38,7 +38,7 @@ export class Methods{
 
     public async showAllWordsWithITranslations() : Promise<void> {
         
-        ConsoleHandling.printInput('\n')
+       
 
         for(let index in this._words) {
 
@@ -56,7 +56,35 @@ export class Methods{
         \n`);
         
       }
-    }      
+    }   
+    
+    
+    public async showAllWordsWithOutTranslations() : Promise<void> {
+        
+        let _nullWord : Word = new NullWord();
+
+        for(let index in this._words) {
+
+            let word : Word = this._words[index];  
+              
+            if 
+            (
+                word.getEnglishWord().toString() ==  _nullWord.getEnglishWord() ||
+                word.getSpanishWord().toString() ==  _nullWord.getSpanishWord() ||
+                word.getFrenchWord().toString() ==  _nullWord.getFrenchWord()           
+            )
+            {
+
+            ConsoleHandling.printInput
+            (`            
+            Deutsch: ${word.getGermanWord().toString()} 
+            Englisch: ${word.getEnglishWord().toString()}
+            Spanisch: ${word.getSpanishWord().toString()}
+            Französich: ${word.getFrenchWord().toString()}
+            `);
+            }
+          } 
+    } 
 
     
     public async  showNumberofAllWords() : Promise<void> {
@@ -106,30 +134,36 @@ export class Methods{
         
     }
 
-    public async showAllWordsWithNoTranslation(): Promise<void>{
+    public async showPercentageWithOutTranslation(): Promise<void>{
 
         let _nullWord : Word = new NullWord();
 
 
         for(let index in this._words) {
+            
+            let count : number;
+            count = 0;
 
-            let word : Word = this._words[index];    
-            if 
-            (
-                word.getEnglishWord().toString() ==  _nullWord.getEnglishWord() ||
-                word.getSpanishWord().toString() ==  _nullWord.getSpanishWord() ||
-                word.getFrenchWord().toString() ==  _nullWord.getFrenchWord()           
-            )
+            let word : Word = this._words[index];  
+
+            if (  word.getEnglishWord().toString() ==  _nullWord.getEnglishWord() )
             {
-
-            ConsoleHandling.printInput
-            (`            
-            Deutsch: ${word.getGermanWord().toString()} 
-            Englisch: ${word.getEnglishWord().toString()}
-            Spanisch: ${word.getSpanishWord().toString()}
-            Französich: ${word.getFrenchWord().toString()}
-            `);
+            
+                count++;
             }
+            else if ( word.getSpanishWord().toString() ==  _nullWord.getEnglishWord() )
+            {
+                count++;
+            }
+            else if (  word.getFrenchWord().toString() ==  _nullWord.getEnglishWord() )
+            {
+                count++;
+            }
+
+            let percentage = (1- count/3)*100;
+            let final = percentage.toFixed();
+            ConsoleHandling.printInput(`${word.getGermanWord().toString()}: ${ final} %`);        
+            
           }  
     }
 
