@@ -1,3 +1,4 @@
+import { method } from 'lodash';
 import ConsoleHandling from './classes/ConsoleHandling';
 import Methods from './classes/Methods';
 
@@ -78,7 +79,7 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      Methods.showAllWordsWithNoTranslation();
+      Methods.showAllWordsWithOutTranslations();
         break;
       case '2':
       Methods.setTranslationTranslator();
@@ -87,7 +88,7 @@ export class UI {
       console.log('Anzahl der angelegten Übersetzungen wird anzeigt');  
         break;
       case '4':
-      console.log('Prozentzahl der Übersetzungen eines Wortes wird anzeigt');  
+      Methods.showPercentageWithOutTranslation() 
         break;
       default:
         this.showFunctionalities();
