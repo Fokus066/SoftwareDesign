@@ -8,7 +8,6 @@ import { ADMIN } from '../main';
 import { TRANSLATOR } from '../main';
 import { worddb } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
-const fs = require('fs');
 
 export class Methods{
 
@@ -18,8 +17,6 @@ export class Methods{
  private _countNewWord = 0;
  private _countTranslation = 0;
 
-
-
  constructor() {
 
   if(Methods.instance)
@@ -28,6 +25,8 @@ export class Methods{
 
   let fileHandler = new FileHandler();
   let wordsJson : WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
+
+  
 
     for(let word of wordsJson) {
     this._words.push(new Word(word));
@@ -61,12 +60,13 @@ export class Methods{
 
     public async AddnewLanguage() : Promise<void> {
 
-        
+        /*
         let fileHandler = new FileHandler(); 
         let data = fileHandler.readJSON('../data/wordlist.json');
         let newLanguage: String = await ConsoleHandling.question('Wort eingeben: ');
+        */
 
-     
+        
 
     }
 

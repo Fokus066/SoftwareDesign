@@ -5,9 +5,7 @@ export class Translator extends Admin{
     private _translatorname;
     private _translatorpassword;
     private _accessfrench;
-   
     private _accessenglish;
-    
     private _accessspanish;
    
 
