@@ -45,14 +45,14 @@
     "GUID": "a7dd6bd7-107b-4e45-9e70-f6ff51cd3512",
     "english": "boy",
     "german": "Junge",
-    "spanish": "garçon",
-    "french": "niño"
+    "spanish": "garçonniño",
+    "french": "garçon"
   },
   {
     "GUID": "91d1e436-79bc-49ff-8fb0-f7f5dd283921",
     "english": "girl",
     "german": "Mädchen",
-    "spanish": "Keine",
+    "spanish": "niña",
     "french": "fille"
   }
 ]
