@@ -21,7 +21,7 @@ export class UI {
       ['Admins Funktionen: ',
         '1. Neue Sprache anlegen',
         '2. Sprache an Übersetzer zuweisen',
-        '3. Zurückgehen'           
+        '3. Abmelden'           
       ], 
       'Was möchtest du machen? ');
 
@@ -50,7 +50,8 @@ export class UI {
         '1. alle Wörter anzeigen',
         '2. Zielsprache auswählen',
         '3. neues Wort anlegen',
-        '4. Anzahl der Wörter anzeigen'
+        '4. Anzahl der Wörter anzeigen',
+        '5 test'
 
       ], 
       'Welche Funktion möchtest du nutzen?: ');
@@ -65,7 +66,7 @@ export class UI {
       console.log('Neue Sprache zugewiesen');  
         break;
       case '2':
-      console.log('Sprache an einem Übersetzer zuweisen');  
+      Methods.AdminAccessRightTranslator();  
         break;
       default:
         this.showFunctionalities();

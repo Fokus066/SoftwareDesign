@@ -8,6 +8,7 @@ import { ADMIN } from '../main';
 import { TRANSLATOR } from '../main';
 import { worddb } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
+const fs = require('fs');
 
 export class Methods{
 
@@ -16,6 +17,7 @@ export class Methods{
  private _words: Word[] = [];
  private _countNewWord = 0;
  private _countTranslation = 0;
+
 
 
  constructor() {
@@ -38,7 +40,6 @@ export class Methods{
 
     public async showAllWordsWithITranslations() : Promise<void> {
         
-       
 
         for(let index in this._words) {
 
@@ -65,16 +66,63 @@ export class Methods{
         let data = fileHandler.readJSON('../data/wordlist.json');
         let newLanguage: String = await ConsoleHandling.question('Wort eingeben: ');
 
-        let _nullWord : Word = new NullWord();
+     
 
-        for(let index in this._words)  {
+    }
 
-            let word : Word = this._words[index];
+    public async AdminAccessRightTranslator() : Promise<void> {
 
-           // word[newLanguage] = _nullWord.getGermanWord();
+        ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Englisch: ${TRANSLATOR.accessenglish} `);
+        ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Spanisch: ${TRANSLATOR.accessspanish} `);
+        ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Französich: ${TRANSLATOR.accessfrench} `);
 
+        let question: String = await ConsoleHandling.question(`Berechtigung für ${TRANSLATOR.translatorname}  ändern? `);
+
+        
+        switch(question.toLowerCase()){
+            case'ja':
+            case'j':  
+            {     
+                let language: String = await ConsoleHandling.question(`Welche Sprache? `);
+
+                switch(language.toLowerCase()){
+                    case'englisch':
+                    case'eng':  
+                    {
+                        TRANSLATOR.accessenglish = (TRANSLATOR.accessenglish) ? false : true;
+                        await this.AdminAccessRightTranslator();  
+        
+                    }
+                    case'spanisch':
+                    case'sp': 
+                    {
+                        TRANSLATOR.accessspanish = (TRANSLATOR.accessspanish) ? false : true;
+                        await this.AdminAccessRightTranslator();  
+                    }break;
+                    case'französich':
+                    case'f': 
+                    {
+                        TRANSLATOR.accessfrench = (TRANSLATOR.accessfrench) ? false : true;
+                        await this.AdminAccessRightTranslator();                       
+                    }break;
+                    default:
+                        await this.AdminAccessRightTranslator();
+                    break;
+        
+                }
+
+            }break;
+            case'nein':
+            case'n': 
+            {
+                await worddb.showAdminFunctionalities();
+            }break;
+            default:
+                await worddb.showAdminFunctionalities();
+            break;
 
         }
+
 
     }
 
@@ -130,10 +178,12 @@ export class Methods{
         }                      
                
         data.push(newJSONWord);
+        
         ConsoleHandling.printInput('Neues Wort ist eingetragen');
 
         this.CreateNewWordCounter();
 
+        fileHandler.writeFile('../data/new_wordlist.json', data)
         worddb.showFunctionalities;
 
     }
@@ -159,7 +209,7 @@ export class Methods{
 
         this._countTranslation++;
 
-        if(this._countTranslation++ == 1) {
+        if(this._countTranslation == 1) {
 
         ConsoleHandling.printInput(`${ this._countTranslation} Wort ist übersetzt`);
 
@@ -220,17 +270,20 @@ export class Methods{
         case'eng':  
         {     
         ConsoleHandling.printInput('Eingabe: ' + word + '\nEnglisch: ' + translation.getEnglishWord().toString());
-        }break;
+        await worddb.showWordFunctionalities();
+        }
         case'spanisch':
         case'sp': 
         {
         ConsoleHandling.printInput('Eingabe: ' + word + '\nSpanisch: '+  translation.getSpanishWord().toString());
-        }break;
+        await worddb.showWordFunctionalities();
+        }
         case'französich':
         case'f': 
         {
         ConsoleHandling.printInput('Eingabe: ' + word + '\nFranzösisch: '+ translation.getFrenchWord().toString());
-        }break; 
+        await worddb.showWordFunctionalities();
+        } 
 
     }worddb.showWordFunctionalities();
    
@@ -244,54 +297,106 @@ export class Methods{
         let data = fileHandler.readJSON('../data/wordlist.json');
 
         let inputword : String = await ConsoleHandling.question('Welches Wort? ');
-        let language : String = await ConsoleHandling.question('Welche Sprache? ');
-        let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
 
         for(let index in this._words){
 
             if (inputword == this._words[index].getGermanWord().toString())
-            {
+
+            {   let language : String = await ConsoleHandling.question('Welche Sprache? ');
+               
+                
+                delete this._words[index];
 
                 switch(language.toLowerCase())
                 {
                     case'englisch':
                     case'eng':
-                    {  
-                        /*
-                        let word = {
+                    {                
+                         
+                        if (TRANSLATOR.accessspanish == true)
+                        {
 
-                            GUID: this._words[index].getGUID(),
-                            english: newTranslation,
-                            german: this._words[index].getGermanWord(),
-                            spanish: this._words[index].getSpanishWord(),
-                            french: this._words[index].getFrenchWord()
-                        }
+                            let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
+                            this._words[index].setEnglishWord(newTranslation); 
+                            let newWord = 
+                                {
+                                    GUID: this._words[index].getGUID().toString(),
+                                    english: newTranslation,
+                                    german: this._words[index].getGermanWord().toString(),
+                                    spanish: this._words[index].getSpanishWord().toString(),
+                                    french: this._words[index].getFrenchWord().toString()
+                                }
 
-                        delete this._words[index];
+                            data.push(newWord);                     
+                            fileHandler.writeFile('../data/wordlist.json', data)
 
-                        data.push(word);
-                        fileHandler.writeFile('../data/wordlist.json', data)   
-                        */
-                        
-                        
-                        break;
+                        }else
+                            {
+                            ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
+                            await worddb.showTranslatorFunctionalities();
+                            }
+                       
                     }
                     case'spanisch':
                     case'sp': 
                     {
-                    
+                        if (TRANSLATOR.accessfrench== true)
+                        {
+
+                            let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
+                            this._words[index].setEnglishWord(newTranslation); 
+                            let newWord = 
+                                {
+                                    GUID: this._words[index].getGUID().toString(),
+                                    english: newTranslation,
+                                    german: this._words[index].getGermanWord().toString(),
+                                    spanish: this._words[index].getSpanishWord().toString(),
+                                    french: this._words[index].getFrenchWord().toString()
+                                }
+
+                            data.push(newWord);                     
+                            fileHandler.writeFile('../data/wordlist.json', data)
+
+                        }else
+                            {
+                            ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
+                            await worddb.showTranslatorFunctionalities();
+                            }
+
                     }
                     
                     case'französich':
                     case'f': 
-                    {          
-                      
+                    {       
+                        if (TRANSLATOR.accessenglish == true)
+                        {
+
+                            let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
+                            this._words[index].setEnglishWord(newTranslation); 
+                            let newWord = 
+                                {
+                                    GUID: this._words[index].getGUID().toString(),
+                                    english: newTranslation,
+                                    german: this._words[index].getGermanWord().toString(),
+                                    spanish: this._words[index].getSpanishWord().toString(),
+                                    french: this._words[index].getFrenchWord().toString()
+                                }
+
+                            data.push(newWord);                     
+                            fileHandler.writeFile('../data/wordlist.json', data)
+
+                        }else
+                            {
+                            ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
+                            await worddb.showTranslatorFunctionalities();
+                            }   
                     }
                 }
-            }  
+            }
         }
 
         this.TranslationCounter();
+        worddb.showTranslatorFunctionalities();
     }
 
 
@@ -328,7 +433,7 @@ export class Methods{
             }
         } 
         else {
-        console.log('\nAdmins Username inkorrekt');
+        console.log('\nUsername inkorrekt');
         worddb.showFunctionalities();
         }
 

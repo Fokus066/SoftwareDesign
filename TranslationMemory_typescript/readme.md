@@ -23,13 +23,13 @@
 - Login für verschiedenen Rollen( User, Übersetzer, Admin) ✔
 - Wörter (gezielt) in gewünschter Sprache übersetzen ✔
 - Nullobject Pattern für "Keine" Antworten ✔
-- Prozentuale Anteil der vorhandenen Übersetzungen vom jeden Wort codieren
+- Prozentuale Anteil der vorhandenen Übersetzungen vom jeden Wort codieren ✔
 - GUID in json Datei einschreiben ✔
 - neues Wort anlegen ✔
 - neue Sprache anlegen 
-- Berechtigungen für den Übersetzer codieren
+- Übersetzer kann die Übersetzung einzelner Wörter vornehmen
+- Berechtigungen für den Übersetzer codieren ✔
 - alle Wörter mit Übersetzungen anzeigen ✔
-- Anzeige einer Liste von der angelegten Wörter codieren 
-- Anzeige einer Liste mit fehlenden Übersetzungen codieren 
+- Anzeige einer Liste mit fehlenden Übersetzungen codieren ✔
 
 
