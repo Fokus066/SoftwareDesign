@@ -14,8 +14,8 @@ export class Methods{
  private static instance : Methods = new Methods()
 
  private _words: Word[] = [];
-
  private _countNewWord = 0;
+ private _countTranslation = 0;
 
 
  constructor() {
@@ -57,7 +57,28 @@ export class Methods{
         
       }
     }   
-    
+
+    public async AddnewLanguage() : Promise<void> {
+
+        
+        let fileHandler = new FileHandler(); 
+        let data = fileHandler.readJSON('../data/wordlist.json');
+        let newLanguage: String = await ConsoleHandling.question('Wort eingeben: ');
+
+        let _nullWord : Word = new NullWord();
+
+        for(let index in this._words)  {
+
+            let word : Word = this._words[index];
+
+           // word[newLanguage] = _nullWord.getGermanWord();
+
+
+        }
+
+    }
+
+ 
     
     public async showAllWordsWithOutTranslations() : Promise<void> {
         
@@ -95,7 +116,7 @@ export class Methods{
 
     public async WriteNewWord() : Promise<void> {
 
-        let newWord: String = await ConsoleHandling.question('Wort eingeben: ')
+        let newWord: String = await ConsoleHandling.question('Wort eingeben: ');
         let fileHandler = new FileHandler();            
         let data = fileHandler.readJSON('../data/wordlist.json');
         let _nullWord : Word = new NullWord();
@@ -134,6 +155,22 @@ export class Methods{
         
     }
 
+    public async TranslationCounter(): Promise<void> {   
+
+        this._countTranslation++;
+
+        if(this._countTranslation++ == 1) {
+
+        ConsoleHandling.printInput(`${ this._countTranslation} Wort ist übersetzt`);
+
+        } else {
+        
+        ConsoleHandling.printInput(`${ this._countTranslation } Wörter sind übersetzt`);
+        }
+        
+        
+    }
+
     public async showPercentageWithOutTranslation(): Promise<void>{
 
         let _nullWord : Word = new NullWord();
@@ -143,7 +180,6 @@ export class Methods{
             
             let count : number;
             count = 0;
-
             let word : Word = this._words[index];  
 
             if (  word.getEnglishWord().toString() ==  _nullWord.getEnglishWord() )
@@ -205,47 +241,58 @@ export class Methods{
         this.showAllWordsWithITranslations();
 
         let fileHandler = new FileHandler(); 
-        let word : String = await ConsoleHandling.question('Welches Wort? ');
+        let data = fileHandler.readJSON('../data/wordlist.json');
+
+        let inputword : String = await ConsoleHandling.question('Welches Wort? ');
         let language : String = await ConsoleHandling.question('Welche Sprache? ');
         let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
 
-        let data = fileHandler.readJSON('../data/wordlist.json');
+        for(let index in this._words){
 
-        let translation : AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];   
-
-        ConsoleHandling.printInput('\n');
-
-        translation  = translation !== undefined ? translation : new NullWord();
-
-        switch(language.toLowerCase()){
-            case'englisch':
-            case'eng':  
+            if (inputword == this._words[index].getGermanWord().toString())
             {
-            translation.setEnglishWord(newTranslation);
-            ConsoleHandling.printInput('Eingabe: ' + word + '\nEnglisch: ' + translation.getEnglishWord().toString());
-            data.push(newTranslation);
-            fileHandler.writeFile('../data/wordlist.json', data)
-            }break;
-            case'spanisch':
-            case'sp': 
-            {
-            translation.setSpanishWord(newTranslation)
-            ConsoleHandling.printInput('Eingabe: ' + word + '\nSpanisch: '+  translation.getSpanishWord().toString());
-            data.push(newTranslation);
-            fileHandler.writeFile('../data/wordlist.json', data)
-            }break;
-            case'französich':
-            case'f': 
-            {
-            translation.setFrenchWord(newTranslation)
-            ConsoleHandling.printInput('Eingabe: ' + word + '\nFranzösisch: '+ translation.getSpanishWord().toString());
-            data.push(newTranslation);
-            fileHandler.writeFile('../data/wordlist.json', data)
-            }break;
 
-        }worddb.showWordFunctionalities();
-   
-}
+                switch(language.toLowerCase())
+                {
+                    case'englisch':
+                    case'eng':
+                    {  
+                        /*
+                        let word = {
+
+                            GUID: this._words[index].getGUID(),
+                            english: newTranslation,
+                            german: this._words[index].getGermanWord(),
+                            spanish: this._words[index].getSpanishWord(),
+                            french: this._words[index].getFrenchWord()
+                        }
+
+                        delete this._words[index];
+
+                        data.push(word);
+                        fileHandler.writeFile('../data/wordlist.json', data)   
+                        */
+                        
+                        
+                        break;
+                    }
+                    case'spanisch':
+                    case'sp': 
+                    {
+                    
+                    }
+                    
+                    case'französich':
+                    case'f': 
+                    {          
+                      
+                    }
+                }
+            }  
+        }
+
+        this.TranslationCounter();
+    }
 
 
     public async CheckUsernameAndPassword() : Promise<void> {

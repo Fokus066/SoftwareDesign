@@ -1,4 +1,3 @@
-import { method } from 'lodash';
 import ConsoleHandling from './classes/ConsoleHandling';
 import Methods from './classes/Methods';
 
