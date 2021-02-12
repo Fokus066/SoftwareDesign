@@ -5,8 +5,6 @@ export class FileHandler
  {
   constructor()
    {
-     
-
    }
 
   public readJSON(pathToFile: string) : any 

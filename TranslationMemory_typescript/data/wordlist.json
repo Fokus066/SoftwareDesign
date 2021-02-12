@@ -18,7 +18,7 @@
     "english": "January",
     "german": "Januar",
     "spanish": "enero",
-    "french": "eau"
+    "french": "Keine"
   },
   {
     "GUID": "d9a6009b-f7e5-436d-9ab9-018709399b2a",
@@ -52,7 +52,7 @@
     "GUID": "91d1e436-79bc-49ff-8fb0-f7f5dd283921",
     "english": "girl",
     "german": "Mädchen",
-    "spanish": "niño",
+    "spanish": "Keine",
     "french": "fille"
   }
 ]

@@ -62,7 +62,7 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      console.log('Funktion neue Sprache');
+      console.log('Neue Sprache zugewiesen');  
         break;
       case '2':
       console.log('Sprache an einem Übersetzer zuweisen');  
@@ -78,7 +78,7 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      console.log('Auflistung fehlender Übersetzungen wird angezeigt');
+      Methods.showAllWordsWithNoTranslation();
         break;
       case '2':
       Methods.setTranslationTranslator();
