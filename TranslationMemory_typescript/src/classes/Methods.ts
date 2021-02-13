@@ -17,20 +17,20 @@ export class Methods{
  private _countNewWord = 0;
  private _countTranslation = 0;
 
- constructor() {
+    constructor() {
 
-  if(Methods.instance)
-  throw new Error('Use Methods.Instance() instead new Methods()')
+    if(Methods.instance)
+    throw new Error('Use Methods.Instance() instead new Methods()')
 
 
-  let fileHandler = new FileHandler();
-  let wordsJson : WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
+    let fileHandler = new FileHandler();
+    let wordsJson : WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
 
-  
+    
 
-    for(let word of wordsJson) {
-    this._words.push(new Word(word));
-    }
+        for(let word of wordsJson) {
+        this._words.push(new Word(word));
+        }
     
     }
     public static getInstance() : Methods {
@@ -67,7 +67,6 @@ export class Methods{
 
         for(let index = 0; index < this._words.length; index++){
             
-
             data[index][newLanguage] = _nullWord.getGermanWord();
             fileHandler.writeFile('../data/wordlist.json', data)
         }
@@ -107,7 +106,7 @@ export class Methods{
                         TRANSLATOR.accessenglish = (TRANSLATOR.accessenglish) ? false : true;
                         await this.AdminAccessRightTranslator();  
         
-                    }
+                    }break;
                     case'spanisch':
                     case'sp': 
                     {
@@ -141,8 +140,6 @@ export class Methods{
 
     }
 
- 
-    
     public async showAllWordsWithOutTranslations() : Promise<void> {
         
         let _nullWord : Word = new NullWord();
@@ -167,7 +164,7 @@ export class Methods{
             Französich: ${word.getFrenchWord().toString()}
             `);
             }
-          } 
+        } 
     } 
     
     public async  showNumberofAllWords() : Promise<void> {
@@ -221,12 +218,12 @@ export class Methods{
 
         this._countTranslation++;
 
-        if(this._countTranslation  == 1) {
-
+        if(this._countTranslation  == 1) 
+        {
         ConsoleHandling.printInput(`\nDu hast ein neues Wort angelegt.`);
-
-        } else {
-        
+        } 
+        else
+        {
         ConsoleHandling.printInput(`\nDu hast ${this._countTranslation} neue Wörter angelegt.`);
         }
         
@@ -237,12 +234,12 @@ export class Methods{
 
         this._countNewWord++;
 
-        if(this._countNewWord  == 1) {
-
+        if(this._countNewWord  == 1)
+        {
         ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
-
-        } else {
-        
+        } 
+        else
+        {
         ConsoleHandling.printInput(`Du hast ${this._countNewWord} neue Wörter angelegt.`);
         }
         
@@ -262,7 +259,6 @@ export class Methods{
 
             if (  word.getEnglishWord().toString() ==  _nullWord.getEnglishWord() )
             {
-            
                 count++;
             }
             else if ( word.getSpanishWord().toString() ==  _nullWord.getEnglishWord() )

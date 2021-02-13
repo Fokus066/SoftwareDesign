@@ -7,7 +7,7 @@ export class Admin {
     
     this._adminname = adminname;
     this._adminpassword =adminpassword;
-}
+ }
 
 
  public get adminname(){
