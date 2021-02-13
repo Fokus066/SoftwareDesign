@@ -158,14 +158,14 @@ export class UI {
    
   public async showFunctionalitiesAgain(): Promise<void>
    {
-    let answer : String = await ConsoleHandling.question('Want to use another function? ');
+    let answer : String = await ConsoleHandling.question('weitere Funktionen nutzen? ');
     switch(answer.toLowerCase()) {
-      case 'y':
-      case 'yes':
+      case 'ja':
+      case 'j':
         this.showFunctionalities();
         break;
+      case 'nein':
       case 'n':
-      case 'no':
         ConsoleHandling.closeConsole()
         break;
       default:
