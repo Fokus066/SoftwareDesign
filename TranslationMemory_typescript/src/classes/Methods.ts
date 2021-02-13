@@ -237,10 +237,24 @@ export class Methods{
             case'nein':
             case'n': 
             {
+            if (this._TranslationSignedIn =false)
+            {
             await worddb.showWordFunctionalities();
             }
+            else
+            {
+            await worddb.showTranslatorFunctionalities();
+            } 
+            }
             default:
-            worddb.showWordFunctionalities();
+            if (this._TranslationSignedIn =false)
+            {
+            await worddb.showWordFunctionalities();
+            }
+            else
+            {
+            await worddb.showTranslatorFunctionalities();
+            } 
             break;            
         }
 
