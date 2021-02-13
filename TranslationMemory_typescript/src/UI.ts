@@ -10,7 +10,7 @@ export class UI {
         '1. Login',
         '2. Zu Users Funktionen',
       ], 
-      'Was möchtest du machen?: ');
+      'Was möchtest du machen?(Zahlen): ');
 
     await this.handleAnswer(answer);
   }
@@ -23,7 +23,7 @@ export class UI {
         '2. Sprache an Übersetzer zuweisen',
         '3. Abmelden'           
       ], 
-      'Was möchtest du machen? ');
+      'Was möchtest du machen?(Zahlen)');
 
     await this.handleAdminChoices(answer);
   }
@@ -37,19 +37,19 @@ export class UI {
         '2. Auflistung fehlender Übersetzungen Übersetzungen eintragen',
         '3. Anzahl der vorhandenen Wörter anzeigen',
         '4. Anzahl der angelegten Übersetzungen anzeigen',
-        '5. Übersetzungen einpflegen',
+        '5. Anzahl der neu angelegten Wörter anzeigen',
         '6. Prozentzahl der Übersetzungen eines Wortes anzeigen',
         '7. Zielsprache auswählen und übersetzen',
-        '8. Anzahl der neu aangelegten Wörter anzeigen',
+        '8. Übersetzungen einpflegen',
         '9. Abmelden'
                   
       ], 
-      'Was möchtest du machen? ');
+      'Was möchtest du machen? (default: zurück)');
 
     await this.handleTranslatorChoices(answer);
   }
 
-  public async showWordFunctionalities() : Promise<void> 
+  public async showUserFunctionalities() : Promise<void> 
   {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
@@ -96,7 +96,7 @@ export class UI {
       Methods.showNumberofTranslation();
         break;
       case '5':
-      Methods.setTranslationTranslator(); 
+      Methods.showNumberofNewWordTranslator();
         break;
        case '6':
       Methods.showPercentageWithOutTranslation(); 
@@ -105,7 +105,7 @@ export class UI {
       Methods.searchForTranslation();
         break;
       case '8':
-      Methods.showNumberofNewWordTranslator();
+      Methods.setTranslationTranslator(); 
         break;
       case '9':
       Methods.TranslatorSignInAndOut();
@@ -125,7 +125,7 @@ export class UI {
         Methods.CheckUsernameAndPassword();
         break;
       case '2':
-        this.showWordFunctionalities();
+        this.showUserFunctionalities();
         break;
       default:
         this.showFunctionalities();

@@ -10,6 +10,7 @@ export class Word extends AbstractWord {
     this.setEnglishWord(word.english);
     this.setGermanWord(word.german);
     this.setSpanishWord(word.spanish);
-    this.setFrenchWord(word.french)
+    this.setFrenchWord(word.french);
+    
   }
 }

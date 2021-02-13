@@ -1,5 +1,5 @@
-export class AbstractWord{
-  
+export class AbstractWord {
+
   private _GUID: String;
   private _englisch: String;
   private _german: String;
@@ -35,22 +35,23 @@ export class AbstractWord{
   }
 
   public setGermanWord(value: String) {
-    this._german= value;
+    this._german = value;
   }
 
   public getSpanishWord(): String {
-      return this._spanish;
+    return this._spanish;
   }
-  
+
   public setSpanishWord(value: String) {
-      this._spanish= value;
+    this._spanish = value;
   }
 
   public getFrenchWord(): String {
-      return this._french;
+    return this._french;
   }
-  
+
   public setFrenchWord(value: String) {
-      this._french= value;
+    this._french = value;
   }
+
 }
