@@ -8,7 +8,7 @@ import { ADMIN } from '../main';
 import { TRANSLATOR } from '../main';
 import { worddb } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
-import { Language} from '../classes/Language';
+import { Language } from '../classes/Language';
 
 export class Methods {
 
@@ -27,7 +27,7 @@ export class Methods {
 
         let fileHandler = new FileHandler();
         let wordsJson: WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
-       
+
 
         for (let word of wordsJson) {
             this._words.push(new Word(word));
@@ -57,7 +57,7 @@ export class Methods {
             \n`);
 
         }
-        
+
     }
 
     public async AddnewLanguage(): Promise<void> {
@@ -107,9 +107,18 @@ export class Methods {
 
     }
 
-    public TranslatorSignInAndOut(): void {
+    public TranslatorSignIn(): void {
 
-        this._TranslationSignedIn = (this._TranslationSignedIn) ? false : true;
+        this._TranslationSignedIn = true;
+        ConsoleHandling.printInput(`\n${TRANSLATOR.translatorname} ist angemeldet\n`);
+
+    }
+
+    
+    public TranslatorSignOut(): void {
+
+        this._TranslationSignedIn = false;
+        ConsoleHandling.printInput(`\n${TRANSLATOR.translatorname} ist abgemeldet\n`)
 
     }
 
@@ -194,6 +203,7 @@ export class Methods {
         }
     }
 
+    
     public async showNumberofAllWords(): Promise<void> {
 
         ConsoleHandling.printInput(`\n`);
@@ -201,7 +211,7 @@ export class Methods {
         await worddb.showUserFunctionalities();
 
     }
-
+    
     public async showNumberofTranslation(): Promise<void> {
 
         ConsoleHandling.printInput(`\n`);
@@ -221,6 +231,7 @@ export class Methods {
         console.log(`Neue Wörter angelegt: ${this._countNewWordTranslator} `);
         await worddb.showTranslatorFunctionalities();
     }
+    
 
 
     public async WriteNewWord(newWord: String): Promise<void> {
@@ -247,46 +258,36 @@ export class Methods {
                     ConsoleHandling.printInput('\n');
 
                     fileHandler.writeFile('../data/new_wordlist.json', data)
-
-                    if (this._TranslationSignedIn == false) {
-                        this.showNewWordUserCounter();
-                        break;
-                    }
-                    else {
+                   
+                    if (this._TranslationSignedIn == true){
                         this.showNewWordTranslatorCounter();
-                        break;
                     }
-
+                    if(this._TranslationSignedIn == false){
+                        this.showNewWordUserCounter()
+                    }
+                    worddb.showFunctionalities();
+                    break;
+                   
 
                 }
             case 'nein':
             case 'n':
                 {
+                    worddb.showFunctionalitiesAgain();
+                    break;
+                }
+            default:
+                {
                     if (this._TranslationSignedIn == false) {
                         await worddb.showUserFunctionalities();
+                        break;
                     }
                     else {
                         await worddb.showTranslatorFunctionalities();
+                        break;
                     }
                 }
-            default:
-                if (this._TranslationSignedIn == false) {
-                    await worddb.showUserFunctionalities();
-                }
-                else {
-                    await worddb.showTranslatorFunctionalities();
-                }
-                break;
         }
-        if (this._TranslationSignedIn == false) {
-            await worddb.showUserFunctionalities();
-
-        }
-        else {
-            await worddb.showTranslatorFunctionalities();
-
-        }
-
     }
 
     public async showTranslationCounter(): Promise<void> {
@@ -351,8 +352,7 @@ export class Methods {
                 count++;
             }
 
-            
-            let percentage = (1 - count / (Object.keys(data[index]).length-2)) * 100;
+            let percentage = (1 - count / (Object.keys(data[index]).length - 2)) * 100;
             let final = percentage.toFixed();
             ConsoleHandling.printInput(`${word.getGermanWord().toString()}: ${final} %`);
 
@@ -367,10 +367,7 @@ export class Methods {
         let onlyChar: RegExp = /^[a-zA-Z]+$/;
 
         let translation: AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];
-
         ConsoleHandling.printInput('\n');
-
-        //translation = translation !== undefined ? translation : new NullWord();
 
         if (translation !== undefined && onlyChar.test(`${word}`) == true && onlyChar.test(`${language}`) == true) {
 
@@ -378,70 +375,43 @@ export class Methods {
                 case 'englisch':
                 case 'eng':
                     {
-                        ConsoleHandling.printInput('Eingabe: ' + word + '\nEnglisch: ' + translation.getEnglishWord().toString());
+                        ConsoleHandling.printInput('Eingabe: ' + word + ' Englisch: ' + translation.getEnglishWord().toString());
 
-                        if (this._TranslationSignedIn == false) {
-                            await worddb.showUserFunctionalities();
-                            break;
-                        }
-                        else {
-                            await worddb.showTranslatorFunctionalities();
-                            break;
-                        }
+                        worddb.showFunctionalitiesAgain();
+                        break;
 
                     }
                 case 'spanisch':
                 case 'sp':
                     {
-                        ConsoleHandling.printInput('Eingabe: ' + word + '\nSpanisch: ' + translation.getSpanishWord().toString());
+                        ConsoleHandling.printInput('Eingabe: ' + word + ' Spanisch: ' + translation.getSpanishWord().toString());
 
-                        if (this._TranslationSignedIn == false) {
-                            await worddb.showUserFunctionalities();
-                            break;
-                        }
-                        else {
-                            await worddb.showTranslatorFunctionalities();
-                            break;
-                        }
+                        worddb.showFunctionalitiesAgain();
+                        break;
+
                     }
                 case 'französich':
                 case 'fr':
                     {
-                        ConsoleHandling.printInput('Eingabe: ' + word + '\nFranzösisch: ' + translation.getFrenchWord().toString());
-                        if (this._TranslationSignedIn == false) {
-                            await worddb.showUserFunctionalities();
-                            break;
-                        }
-                        else {
-                            await worddb.showTranslatorFunctionalities();
-                            break;
-                        }
+                        ConsoleHandling.printInput('Eingabe: ' + word + ' Französisch: ' + translation.getFrenchWord().toString());
+
+                        worddb.showFunctionalitiesAgain();
+                        break;
+
                     }
                 default:
                     {
-                        if (this._TranslationSignedIn == false) {
-                            await worddb.showUserFunctionalities();
-                            break;
-                        }
-                        else {
-                            await worddb.showTranslatorFunctionalities();
-                            break;
-                        }
+                        worddb.showFunctionalitiesAgain();
+                        break;
+
                     }
             }
 
 
-        } else if (onlyChar.test(`${word}`) == false || onlyChar.test(`${language}`) == false) {
+        }
+        if (onlyChar.test(`${word}`) == false || onlyChar.test(`${language}`) == false) {
             ConsoleHandling.printInput(`Die Sprache und/oder das Wort kann nicht als Wort gelesen werden.`);
-            if (this._TranslationSignedIn == false) {
-                await worddb.showUserFunctionalities();
-
-            }
-            else {
-                this.WriteNewWord(word);
-                await worddb.showTranslatorFunctionalities();
-
-            }
+            worddb.showFunctionalities();
         }
         else {
 
@@ -551,7 +521,6 @@ export class Methods {
             }
         }
 
-        this.showTranslationCounter();
         worddb.showTranslatorFunctionalities();
     }
 
@@ -580,8 +549,7 @@ export class Methods {
 
             if (password == TRANSLATOR.translatorpassword) {
 
-                console.log('\nAnmeldung als Übersetzer erfolgreich!');
-                this.TranslatorSignInAndOut();
+                this.TranslatorSignIn();
                 await worddb.showTranslatorFunctionalities();
             }
             else {

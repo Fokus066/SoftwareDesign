@@ -112,7 +112,7 @@ export class UI {
       Methods.setTranslationTranslator(); 
         break;
       case '9':
-      Methods.TranslatorSignInAndOut();
+      Methods.TranslatorSignOut();
         break;
       default:
         this.showFunctionalities();
