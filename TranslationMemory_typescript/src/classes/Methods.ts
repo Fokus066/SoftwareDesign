@@ -169,7 +169,6 @@ export class Methods{
             }
           } 
     } 
-
     
     public async  showNumberofAllWords() : Promise<void> {
         ConsoleHandling.printInput(`\n`);
@@ -287,6 +286,9 @@ export class Methods{
 
         let language : String = await ConsoleHandling.question('Welche Sprache? ');
         let word : String = await ConsoleHandling.question('Welches Wort? ');
+        let onlyChar: RegExp = /^[a-zA-Z]+$/;
+
+        let _nullWord : Word = new NullWord();
 
         let translation : AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];   
 
@@ -294,7 +296,7 @@ export class Methods{
 
         //translation  = translation !== undefined ? translation : new NullWord();
 
-        if (translation !== undefined){
+        if (translation !== undefined && onlyChar.test(`${word}`) == true){
 
             switch(language.toLowerCase()){
                 case'englisch':
@@ -322,10 +324,15 @@ export class Methods{
             }
 
       
-        }else 
+        }else if ( onlyChar.test(`${word}`) == false)
             {
-                this.WriteNewWord(word);
+            ConsoleHandling.printInput(`${word} ist kein Wort`);
+            worddb.showWordFunctionalities();
             }
+        else {
+            ConsoleHandling.printInput(`Eingabe:  ${ word } \nFranzösisch: ${_nullWord.getEnglishWord().toString()}\n`);
+            this.WriteNewWord(word);
+        }
     
     }
 

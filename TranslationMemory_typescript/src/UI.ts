@@ -55,7 +55,7 @@ export class UI {
         '1. Alle Wörter anzeigen',
         '2. Zielsprache auswählen und übersetzen',
         '3. Anzahl der neu angelegten Wörter anzeigen',
-        '4. Anzahl der Wörter im Datenbank anzeigen',
+        '4. Anzahl der Wörter im Datenbank anzeigen'
 
       ], 
       'Welche Funktion möchtest du nutzen?: ');
