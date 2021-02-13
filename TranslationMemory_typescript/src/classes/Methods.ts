@@ -15,7 +15,9 @@ export class Methods{
 
  private _words: Word[] = [];
  private _countNewWordUser = 0;
+ private _countNewWordTranslator = 0;
  private _countTranslation = 0;
+ private _TranslationSignedIn = false;
 
     constructor() {
 
@@ -84,6 +86,12 @@ export class Methods{
         ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Französich: ${TRANSLATOR.accessfrench} `);
         ConsoleHandling.printInput(`\n`);
 
+    }
+
+    public TranslatorSignInAndOut(): void {
+
+        this._TranslationSignedIn = (this._TranslationSignedIn) ? false : true;
+        
     }
 
     public async AdminAccessRightTranslator() : Promise<void> {
@@ -179,9 +187,14 @@ export class Methods{
         
     }
 
-    public async  showNumberofNewWord() : Promise<void> {
+    public async  showNumberofNewWordUser() : Promise<void> {
         ConsoleHandling.printInput(`\n`);
         console.log (`Neue Wörter angelegt: ${this. _countNewWordUser} `);
+        
+    }
+    public async  showNumberofNewWordTranslator() : Promise<void> {
+        ConsoleHandling.printInput(`\n`);
+        console.log (`Neue Wörter angelegt: ${this. _countNewWordTranslator} `);
         
     }
 
@@ -211,7 +224,14 @@ export class Methods{
         
                 fileHandler.writeFile('../data/new_wordlist.json', data)
                 worddb.showFunctionalities;
+                if (this._TranslationSignedIn =false)
+                {
                 this.showNewWordUserCounter();
+                } else 
+                {
+                this.showNewWordTranslatorCounter();
+                } 
+                
     
                 await worddb.showWordFunctionalities();
             }
@@ -254,6 +274,20 @@ export class Methods{
         else
         {
         ConsoleHandling.printInput(`Du hast ${this._countNewWordUser} neue Wörter angelegt.`);
+        }
+        
+    }
+    public showNewWordTranslatorCounter(): void {   
+
+        this._countNewWordTranslator++;
+
+        if(this._countNewWordTranslator == 1)
+        {
+        ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
+        } 
+        else
+        {
+        ConsoleHandling.printInput(`Du hast ${this._countNewWordTranslator} neue Wörter angelegt.`);
         }
         
     }
@@ -467,6 +501,7 @@ export class Methods{
             if(password == TRANSLATOR.translatorpassword){
         
             console.log('\nAnmeldung als Übersetzer erfolgreich!');
+            this.TranslatorSignInAndOut();
             await worddb.showTranslatorFunctionalities();
             }
             else {

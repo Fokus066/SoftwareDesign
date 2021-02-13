@@ -40,7 +40,8 @@ export class UI {
         '5. Übersetzungen einpflegen',
         '6. Prozentzahl der Übersetzungen eines Wortes anzeigen',
         '7. Zielsprache auswählen und übersetzen',
-        '8. Abmelden'
+        '8. Abmelden',
+        '9. Anzahl der neu aangelegten Wörter anzeigen'
                   
       ], 
       'Was möchtest du machen? ');
@@ -103,6 +104,12 @@ export class UI {
       case '7':
       Methods.searchForTranslation();
         break;
+      case '8':
+      Methods.showNumberofNewWordTranslator();
+        break;
+      case '9':
+      Methods.TranslatorSignInAndOut();
+        break;
       default:
         this.showFunctionalities();
         break;
@@ -137,7 +144,7 @@ export class UI {
       Methods.searchForTranslation();
         break;
       case '3':
-      Methods.showNumberofNewWord();
+      Methods.showNumberofNewWordUser();
         break;
       case '4':
       Methods.showNumberofAllWords();
