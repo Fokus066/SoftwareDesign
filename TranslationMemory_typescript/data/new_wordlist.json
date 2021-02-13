@@ -6,7 +6,8 @@
     "spanish": "idioma",
     "french": "Langue",
     "sweden": "Keine",
-    "thai": "Keine"
+    "thai": "Keine",
+    "japanese": "Keine"
   },
   {
     "GUID": "b4c34d64-28dc-461b-b133-f4ebfa618cad",
@@ -59,15 +60,15 @@
   },
   {
     "GUID": "34dc0119-d9a9-47e6-8ced-a061e91b8666",
-    "english": "table",
+    "english": "Tisch",
     "german": "Tisch",
     "spanish": "Keine",
     "french": "Keine"
   },
   {
-    "GUID": "cc26e59d-17da-4d8c-b370-39480135f3ff",
+    "GUID": "caf8723f-2dc1-4a3f-b18f-1ae8bb6af185",
     "english": "Keine",
-    "german": "Glas",
+    "german": "fein",
     "spanish": "Keine",
     "french": "Keine"
   }

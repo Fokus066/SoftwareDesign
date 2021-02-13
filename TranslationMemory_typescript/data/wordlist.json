@@ -6,7 +6,8 @@
     "spanish": "idioma",
     "french": "Langue",
     "sweden": "Keine",
-    "thai": "Keine"
+    "thai": "Keine",
+    "japanese": "Keine"
   },
   {
     "GUID": "b4c34d64-28dc-461b-b133-f4ebfa618cad",
@@ -59,7 +60,7 @@
   },
   {
     "GUID": "34dc0119-d9a9-47e6-8ced-a061e91b8666",
-    "english": "table",
+    "english": "Tisch",
     "german": "Tisch",
     "spanish": "Keine",
     "french": "Keine"

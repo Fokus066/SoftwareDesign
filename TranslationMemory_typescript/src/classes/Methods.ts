@@ -55,8 +55,11 @@ export class Methods {
             Spanisch: ${word.getSpanishWord().toString()}
             Französich: ${word.getFrenchWord().toString()}
             \n`);
-
+            
         }
+
+        await worddb.showFunctionalitiesAgain();
+
 
     }
 
@@ -257,7 +260,7 @@ export class Methods {
 
                     ConsoleHandling.printInput('\n');
 
-                    fileHandler.writeFile('../data/new_wordlist.json', data)
+                    fileHandler.writeFile('../data/wordlist.json', data)
                    
                     if (this._TranslationSignedIn == true){
                         this.showNewWordTranslatorCounter();
@@ -369,6 +372,9 @@ export class Methods {
         let translation: AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];
         ConsoleHandling.printInput('\n');
 
+        
+        
+
         if (translation !== undefined && onlyChar.test(`${word}`) == true && onlyChar.test(`${language}`) == true) {
 
             switch (language.toLowerCase()) {
@@ -376,8 +382,7 @@ export class Methods {
                 case 'eng':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Englisch: ' + translation.getEnglishWord().toString());
-
-                        worddb.showFunctionalitiesAgain();
+                        worddb.showUserFunctionalities();
                         break;
 
                     }
@@ -385,8 +390,7 @@ export class Methods {
                 case 'sp':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Spanisch: ' + translation.getSpanishWord().toString());
-
-                        worddb.showFunctionalitiesAgain();
+                        worddb.showUserFunctionalities();
                         break;
 
                     }
@@ -394,14 +398,13 @@ export class Methods {
                 case 'fr':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Französisch: ' + translation.getFrenchWord().toString());
-
-                        worddb.showFunctionalitiesAgain();
+                        worddb.showUserFunctionalities();
                         break;
 
                     }
                 default:
                     {
-                        worddb.showFunctionalitiesAgain();
+                        worddb.showUserFunctionalities();
                         break;
 
                     }
@@ -409,22 +412,21 @@ export class Methods {
 
 
         }
-        if (onlyChar.test(`${word}`) == false || onlyChar.test(`${language}`) == false) {
+        else if (onlyChar.test(`${word}`) == false || onlyChar.test(`${language}`) == false) {
             ConsoleHandling.printInput(`Die Sprache und/oder das Wort kann nicht als Wort gelesen werden.`);
             worddb.showFunctionalities();
-        }
-        else {
+        }else {
 
             let translation: Word = new NullWord();
             ConsoleHandling.printInput(`Zielsprache: ${translation.getGermanWord().toString()}.`);
             this.WriteNewWord(word);
         }
+        
+        
 
     }
 
     public async setTranslationTranslator(): Promise<void> {
-
-        this.showAllWordsWithITranslations();
 
         let fileHandler = new FileHandler();
         let data = fileHandler.readJSON('../data/wordlist.json');
@@ -454,16 +456,19 @@ export class Methods {
                                     fileHandler.writeFile('../data/wordlist.json', data);
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 } else {
                                     ConsoleHandling.printInput(`${newTranslation} ist kein Wort. `);
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 }
 
-                            } else {
+                            } 
+                            else {
                                 ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
                                 await worddb.showTranslatorFunctionalities();
                             }
-                            break;
+                            
                         }
                     case 'spanisch':
                     case 'sp':
@@ -478,15 +483,19 @@ export class Methods {
                                     fileHandler.writeFile('../data/wordlist.json', data)
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 } else {
                                     ConsoleHandling.printInput(`${newTranslation} ist kein Wort. `);
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 }
-                            } else {
+                            } 
+                            else {
                                 ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
                                 await worddb.showTranslatorFunctionalities();
+                                break;
                             }
-                            break;
+                            
                         }
 
                     case 'französich':
@@ -501,16 +510,19 @@ export class Methods {
                                     fileHandler.writeFile('../data/wordlist.json', data);
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 }
                                 else {
                                     ConsoleHandling.printInput(`${newTranslation} ist kein Wort. `);
                                     await worddb.showTranslatorFunctionalities();
+                                    break;
                                 }
                             } else {
                                 ConsoleHandling.printInput(`${TRANSLATOR.translatorname} ist nicht berechtigt diese Sprache zu übersetzen.`)
                                 await worddb.showTranslatorFunctionalities();
+                                break;
                             }
-                            break;
+                            
                         }
                     default:
                         {
