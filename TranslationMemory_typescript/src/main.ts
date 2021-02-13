@@ -7,4 +7,3 @@ export let TRANSLATOR= new Translator("translator123", "whoever");
 
 export let worddb : UI = new UI();
 worddb.showFunctionalities();
-

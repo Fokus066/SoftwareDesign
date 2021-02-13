@@ -14,7 +14,7 @@ export class Methods{
  private static instance : Methods = new Methods()
 
  private _words: Word[] = [];
- private _countNewWord = 0;
+ private _countNewWordUser = 0;
  private _countTranslation = 0;
 
     constructor() {
@@ -169,9 +169,22 @@ export class Methods{
     
     public async  showNumberofAllWords() : Promise<void> {
         ConsoleHandling.printInput(`\n`);
-        console.log (`Es sind insgesamt ${this._words.length} Wörter im Datenbank`);
+        console.log (`Es sind insgesamt ${this._words.length} Wörter im Datenbank.`);
         
     }
+
+    public async  showNumberofTranslation() : Promise<void> {
+        ConsoleHandling.printInput(`\n`);
+        console.log (`Neue Übersetzungen: ${this._countTranslation} `);
+        
+    }
+
+    public async  showNumberofNewWord() : Promise<void> {
+        ConsoleHandling.printInput(`\n`);
+        console.log (`Neue Wörter angelegt: ${this. _countNewWordUser} `);
+        
+    }
+
 
     public async WriteNewWord(newWord: String) : Promise<void> {
 
@@ -198,7 +211,7 @@ export class Methods{
         
                 fileHandler.writeFile('../data/new_wordlist.json', data)
                 worddb.showFunctionalities;
-                this.showNewWordCounter();
+                this.showNewWordUserCounter();
     
                 await worddb.showWordFunctionalities();
             }
@@ -230,17 +243,17 @@ export class Methods{
         
     }
 
-    public showNewWordCounter(): void {   
+    public showNewWordUserCounter(): void {   
 
-        this._countNewWord++;
+        this._countNewWordUser++;
 
-        if(this._countNewWord  == 1)
+        if(this._countNewWordUser  == 1)
         {
         ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
         } 
         else
         {
-        ConsoleHandling.printInput(`Du hast ${this._countNewWord} neue Wörter angelegt.`);
+        ConsoleHandling.printInput(`Du hast ${this._countNewWordUser} neue Wörter angelegt.`);
         }
         
     }

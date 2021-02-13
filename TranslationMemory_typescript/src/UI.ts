@@ -92,7 +92,7 @@ export class UI {
       Methods.showNumberofAllWords();  
         break;
       case '4':
-      Methods.showTranslationCounter();
+      Methods.showNumberofTranslation();
         break;
       case '5':
       Methods.setTranslationTranslator(); 
@@ -137,7 +137,7 @@ export class UI {
       Methods.searchForTranslation();
         break;
       case '3':
-      Methods.showNewWordCounter();
+      Methods.showNumberofNewWord();
         break;
       case '4':
       Methods.showNumberofAllWords();
