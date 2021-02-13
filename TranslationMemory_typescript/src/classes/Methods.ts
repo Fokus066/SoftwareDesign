@@ -185,7 +185,7 @@ export class Methods {
 
     }
 
-    public async showAllWordsWithOutTranslations(): Promise<void> {
+    public showAllWordsWithOutTranslations(): void {
 
         let _nullWord: Word = new NullWord();
 
@@ -209,9 +209,11 @@ export class Methods {
     }
 
     
-    public async showAllWordsWithTranslations(): Promise<void> {
+    public  showAllWordsWithTranslations(): void {
 
         let _nullWord: Word = new NullWord();
+
+        ConsoleHandling.printInput(`\n`);
 
         for (let index in this._words) {
 
@@ -225,35 +227,31 @@ export class Methods {
                 ConsoleHandling.printInput(`${word.getGermanWord().toString()} :100% Übersetzung`);
             }
         }
+        ConsoleHandling.printInput(`\n`);
     }
 
     
-    public async showNumberofAllWords(): Promise<void> {
+    public showNumberofAllWords():void {
 
         ConsoleHandling.printInput(`\n`);
         console.log(`Es sind insgesamt ${this._words.length} Wörter im Datenbank.`);
-        await worddb.showUserFunctionalities();
+        worddb.showUserFunctionalities();
 
     }
     
-    public async showNumberofTranslation(): Promise<void> {
+    public showNumberofTranslation(): void {
 
         ConsoleHandling.printInput(`\n`);
-        console.log(`Neue Übersetzungen: ${this._countTranslation} `);
-        await worddb.showTranslatorFunctionalities();
+        console.log(`Neue Übersetzungen (Übersetzer): ${this._countTranslation} `);
+        worddb.showTranslatorFunctionalities();
     }
 
-    public async showNumberofNewWordUser(): Promise<void> {
+   
+    public showNumberofNewWordTranslator(): void {
 
         ConsoleHandling.printInput(`\n`);
-        console.log(`Neue Wörter angelegt: ${this._countNewWordUser} `);
-        await worddb.showUserFunctionalities();
-    }
-    public async showNumberofNewWordTranslator(): Promise<void> {
-
-        ConsoleHandling.printInput(`\n`);
-        console.log(`Neue Wörter angelegt: ${this._countNewWordTranslator} `);
-        await worddb.showTranslatorFunctionalities();
+        console.log(`Neue Wörter angelegt (Übersetzer): ${this._countNewWordTranslator} `);
+        worddb.showTranslatorFunctionalities();
     }
     
 
@@ -286,7 +284,7 @@ export class Methods {
                     if (this._TranslationSignedIn == true){
                         this.showNewWordTranslatorCounter();
                     }
-                    if(this._TranslationSignedIn == false){
+                    else if(this._TranslationSignedIn == false){
                         this.showNewWordUserCounter()
                     }
                     worddb.showFunctionalities();
@@ -314,7 +312,7 @@ export class Methods {
         }
     }
 
-    public async showTranslationCounter(): Promise<void> {
+    public  showTranslationCounter(): void {
 
         this._countTranslation++;
 
@@ -325,6 +323,19 @@ export class Methods {
             ConsoleHandling.printInput(`\nDu hast ${this._countTranslation} neue Wörter angelegt.`);
         }
 
+
+    }
+
+    public showNewWordTranslatorCounter(): void {
+
+        this._countNewWordTranslator++;
+
+        if (this._countNewWordTranslator == 1) {
+            ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
+        }
+        else {
+            ConsoleHandling.printInput(`Du hast ${this._countNewWordTranslator} neue Wörter angelegt.`);
+        }
 
     }
 
@@ -340,21 +351,17 @@ export class Methods {
         }
 
     }
-    public showNewWordTranslatorCounter(): void {
 
-        this._countNewWordTranslator++;
+    public showNumberofNewWordUser():void {
 
-        if (this._countNewWordTranslator == 1) {
-            ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
-        }
-        else {
-            ConsoleHandling.printInput(`Du hast ${this._countNewWordTranslator} neue Wörter angelegt.`);
-        }
-
+        ConsoleHandling.printInput(`\n`);
+        console.log(`Wörter neu angelegt(User):  ${this._countNewWordUser} `);
+        worddb.showUserFunctionalities();
     }
+    
 
 
-    public async showPercentageWithOutTranslation(): Promise<void> {
+    public showPercentageWithOutTranslation():void {
 
         let _nullWord: Word = new NullWord();
         let fileHandler = new FileHandler();
@@ -369,10 +376,10 @@ export class Methods {
             if (word.getEnglishWord().toString() == _nullWord.getEnglishWord()) {
                 count++;
             }
-            else if (word.getSpanishWord().toString() == _nullWord.getSpanishWord()) {
+            if (word.getSpanishWord().toString() == _nullWord.getSpanishWord()) {
                 count++;
             }
-            else if (word.getFrenchWord().toString() == _nullWord.getFrenchWord()) {
+            if (word.getFrenchWord().toString() == _nullWord.getFrenchWord()) {
                 count++;
             }
 

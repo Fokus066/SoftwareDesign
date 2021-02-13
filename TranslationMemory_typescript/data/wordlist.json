@@ -4,10 +4,7 @@
     "english": "language",
     "german": "Sprache",
     "spanish": "idioma",
-    "french": "Langue",
-    "sweden": "Keine",
-    "thai": "Keine",
-    "japanese": "Keine"
+    "french": "Langue"
   },
   {
     "GUID": "b4c34d64-28dc-461b-b133-f4ebfa618cad",
@@ -62,6 +59,48 @@
     "GUID": "34dc0119-d9a9-47e6-8ced-a061e91b8666",
     "english": "Tisch",
     "german": "Tisch",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "921c316c-2d0e-48d3-8828-31f339082cf7",
+    "english": "Keine",
+    "german": "Maus",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "a44e4981-61e0-44d2-93ab-5562f1ae6b9a",
+    "english": "Keine",
+    "german": "Elefant",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "07897af0-ad7a-426f-a5b7-f62bf5d1f878",
+    "english": "Keine",
+    "german": "Glas",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "8561a662-80f6-4fd0-8292-e106ba44edd2",
+    "english": "Keine",
+    "german": "Affe",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "9e08717f-e8d2-4bc2-b15d-dacfe3e2b7fc",
+    "english": "Keine",
+    "german": "Hase",
+    "spanish": "Keine",
+    "french": "Keine"
+  },
+  {
+    "GUID": "df50bbc5-941b-464e-8dc0-21622aeaf5ca",
+    "english": "pig",
+    "german": "schwein",
     "spanish": "Keine",
     "french": "Keine"
   }
