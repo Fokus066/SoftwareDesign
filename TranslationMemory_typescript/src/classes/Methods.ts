@@ -38,7 +38,7 @@ export class Methods {
         return Methods.instance
     }
 
-    public async showAllWordsWithITranslations(): Promise<void> {
+    public async showAllWords(): Promise<void> {
 
         for (let index in this._words) {
 
@@ -100,6 +100,8 @@ export class Methods {
 
         await worddb.showAdminFunctionalities();
     }
+
+
 
     public showTranslatorAccesses(): void {
 
@@ -202,6 +204,25 @@ export class Methods {
                 Englisch: ${word.getEnglishWord().toString()}
                 Spanisch: ${word.getSpanishWord().toString()}
                 Französich: ${word.getFrenchWord().toString()}`);
+            }
+        }
+    }
+
+    
+    public async showAllWordsWithTranslations(): Promise<void> {
+
+        let _nullWord: Word = new NullWord();
+
+        for (let index in this._words) {
+
+            let word: Word = this._words[index];
+
+            if (
+                word.getEnglishWord().toString() !== _nullWord.getEnglishWord() &&
+                word.getSpanishWord().toString() !== _nullWord.getSpanishWord() &&
+                word.getFrenchWord().toString() !== _nullWord.getFrenchWord()
+            ) {
+                ConsoleHandling.printInput(`${word.getGermanWord().toString()} :100% Übersetzung`);
             }
         }
     }

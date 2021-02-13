@@ -10,12 +10,12 @@ export class Admin {
  }
 
 
- public get adminname(){
+ public get adminname(): String{
      return this._adminname;
 
  }
 
- public get adminpassword(){
+ public get adminpassword(): String{
      return this._adminpassword;
 
  }

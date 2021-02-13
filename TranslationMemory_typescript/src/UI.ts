@@ -57,7 +57,8 @@ export class UI {
         '1. Alle Wörter anzeigen',
         '2. Zielsprache auswählen und übersetzen',
         '3. Anzahl der neu angelegten Wörter anzeigen',
-        '4. Anzahl der Wörter im Datenbank anzeigen'
+        '4. Anzahl der Wörter im Datenbank anzeigen',
+        '5. Alle Wörter mit allen Übersetzungen zeigen'
 
       ], 
       'Welche Funktion möchtest du nutzen?: ');
@@ -88,7 +89,7 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      Methods.showAllWordsWithITranslations();
+      Methods.showAllWords();
         break;
       case '2':
       Methods.showAllWordsWithOutTranslations();
@@ -142,7 +143,7 @@ export class UI {
   {
     switch(answer) {
       case '1': 
-      Methods.showAllWordsWithITranslations();
+      Methods.showAllWords();
         break;
       case '2':
       Methods.searchForTranslation();
@@ -152,6 +153,9 @@ export class UI {
         break;
       case '4':
       Methods.showNumberofAllWords();
+        break;
+      case '5':
+        Methods.showAllWordsWithTranslations();
         break;
       default:
         this.showFunctionalities();

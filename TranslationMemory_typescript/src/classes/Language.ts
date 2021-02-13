@@ -26,7 +26,7 @@ export class Language extends Word {
 
    }
 
-    public get germanLCID() {
+    public get germanLCID() : String  {
 
         return this._germanLCID;
     }
@@ -36,7 +36,7 @@ export class Language extends Word {
         this._germanLCID = value;
     }
 
-    public get spanishLCID() {
+    public get spanishLCID() : String {
         
         return this._spanishLCID;
     }
@@ -46,7 +46,7 @@ export class Language extends Word {
         this._spanishLCID = value;
     }
 
-    public get englishLCID() {
+    public get englishLCID() : String {
 
         return this._englishLCID;
     }
@@ -56,7 +56,7 @@ export class Language extends Word {
         this._englishLCID = value;
     }
     
-    public get frenchLCID() {
+    public get frenchLCID(): String  {
 
         return this._frenchLCID;
     }
