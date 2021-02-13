@@ -8,6 +8,7 @@ import { ADMIN } from '../main';
 import { TRANSLATOR } from '../main';
 import { worddb } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
+import { Language} from '../classes/Language';
 
 export class Methods {
 
@@ -26,6 +27,7 @@ export class Methods {
 
         let fileHandler = new FileHandler();
         let wordsJson: WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
+       
 
         for (let word of wordsJson) {
             this._words.push(new Word(word));
@@ -64,7 +66,7 @@ export class Methods {
         let data = fileHandler.readJSON('../data/wordlist.json');
         let _nullWord: Word = new NullWord();
         let newLanguage: any = await ConsoleHandling.question('Neue Sprache: ');
-        let onlyChar: RegExp = /^[a-zA-Z]+$/;
+        let onlyChar: RegExp = /^[a-zäöüA-ZÄÖÜ]+$/;
 
         for (let index = 0; index < this._words.length; index++) {
 
@@ -79,6 +81,20 @@ export class Methods {
                 break;
             }
         }
+        await worddb.showAdminFunctionalities();
+    }
+
+    public async showLanguage(): Promise<void> {
+
+        let fileHandler = new FileHandler();
+        let single: WordDAO = fileHandler.readObjectFile('../data/wordlist.json');
+        let language: Language = new Language(single);
+        ConsoleHandling.printInput(`
+        Englisch:    ${language.englishLCID}
+        Deutsch:     ${language.germanLCID}
+        Französisch: ${language.frenchLCID}
+        Spanisch:    ${language.spanishLCID}\n`);
+
         await worddb.showAdminFunctionalities();
     }
 
@@ -423,7 +439,6 @@ export class Methods {
             }
             else {
                 this.WriteNewWord(word);
-                ConsoleHandling.printInput(`L:423`);
                 await worddb.showTranslatorFunctionalities();
 
             }

@@ -21,7 +21,8 @@ export class UI {
       ['Admins Funktionen: ',
         '1. Neue Sprache anlegen',
         '2. Sprache an Übersetzer zuweisen',
-        '3. Abmelden'           
+        '3. local-ID', 
+               
       ], 
       'Was möchtest du machen?(Zahlen)');
 
@@ -72,6 +73,9 @@ export class UI {
         break;
       case '2':
       Methods.AdminAccessRightTranslator();  
+        break;
+      case '3':
+      Methods.showLanguage();  
         break;
       default:
       this.showFunctionalities();
