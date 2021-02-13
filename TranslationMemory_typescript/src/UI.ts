@@ -40,8 +40,8 @@ export class UI {
         '5. Übersetzungen einpflegen',
         '6. Prozentzahl der Übersetzungen eines Wortes anzeigen',
         '7. Zielsprache auswählen und übersetzen',
-        '8. Abmelden',
-        '9. Anzahl der neu aangelegten Wörter anzeigen'
+        '8. Anzahl der neu aangelegten Wörter anzeigen',
+        '9. Abmelden'
                   
       ], 
       'Was möchtest du machen? ');
@@ -74,7 +74,7 @@ export class UI {
       Methods.AdminAccessRightTranslator();  
         break;
       default:
-        this.showFunctionalities();
+      this.showFunctionalities();
         break;
     }
     await this.showFunctionalitiesAgain();

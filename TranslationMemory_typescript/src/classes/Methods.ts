@@ -24,7 +24,6 @@ export class Methods{
     if(Methods.instance)
     throw new Error('Use Methods.Instance() instead new Methods()')
 
-
     let fileHandler = new FileHandler();
     let wordsJson : WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
 
