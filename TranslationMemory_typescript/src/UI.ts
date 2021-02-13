@@ -8,7 +8,7 @@ export class UI {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
         '1. Login',
-        '2. Übersetzen',
+        '2. Zu Users Funktionen',
       ], 
       'Was möchtest du machen?: ');
 
@@ -33,10 +33,15 @@ export class UI {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
         'Übersetzers Funktionen:\n ',
-        '1. Auflistung fehlender Übersetzungen',
-        '2. Übersetzungen eintragen',
-        '3. Anzahl der angelegten Übersetzungen anzeigen',
-        '4. Prozentzahl der Übersetzungen eines Wortes anzeigen'           
+        '1. Alle Wörter anzeigen',
+        '2. Auflistung fehlender Übersetzungen Übersetzungen eintragen',
+        '3. Anzahl der vorhandenen Wörter anzeigen',
+        '4. Anzahl der angelegten Übersetzungen anzeigen',
+        '5. Übersetzungen einpflegen',
+        '6. Prozentzahl der Übersetzungen eines Wortes anzeigen',
+        '7. Zielsprache auswählen und übersetzen',
+        '8. Abmelden'
+                  
       ], 
       'Was möchtest du machen? ');
 
@@ -47,11 +52,10 @@ export class UI {
   {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
-        '1. alle Wörter anzeigen',
-        '2. Zielsprache auswählen',
-        '3. neues Wort anlegen',
-        '4. Anzahl der Wörter anzeigen',
-        '5 test'
+        '1. Alle Wörter anzeigen',
+        '2. Zielsprache auswählen und übersetzen',
+        '3. Anzahl der neu angelegten Wörter anzeigen',
+        '4. Anzahl der Wörter im Datenbank anzeigen',
 
       ], 
       'Welche Funktion möchtest du nutzen?: ');
@@ -79,16 +83,25 @@ export class UI {
    {
     switch(answer) {
       case '1': 
-      Methods.showAllWordsWithOutTranslations();
+      Methods.showAllWordsWithITranslations();
         break;
       case '2':
-      Methods.setTranslationTranslator();
+      Methods.showAllWordsWithOutTranslations();
         break;
       case '3':
-      console.log('Anzahl der angelegten Übersetzungen wird anzeigt');  
+      Methods.showNumberofAllWords();  
         break;
       case '4':
-      Methods.showPercentageWithOutTranslation() 
+      Methods.showTranslationCounter();
+        break;
+      case '5':
+      Methods.setTranslationTranslator(); 
+        break;
+       case '6':
+      Methods.showPercentageWithOutTranslation(); 
+        break;
+      case '7':
+      Methods.searchForTranslation();
         break;
       default:
         this.showFunctionalities();
@@ -124,7 +137,7 @@ export class UI {
       Methods.searchForTranslation();
         break;
       case '3':
-      Methods.WriteNewWord();
+      Methods.showNewWordCounter();
         break;
       case '4':
       Methods.showNumberofAllWords();

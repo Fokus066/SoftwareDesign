@@ -1,10 +1,10 @@
 export class AbstractWord{
   
   private _GUID: String;
-  public _englisch: String;
+  private _englisch: String;
   private _german: String;
-  public _spanish: String;
-  public _french: String;
+  private _spanish: String;
+  private _french: String;
 
   constructor() {
     this._GUID = "";

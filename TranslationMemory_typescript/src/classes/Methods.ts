@@ -30,7 +30,7 @@ export class Methods{
 
     for(let word of wordsJson) {
     this._words.push(new Word(word));
-     }
+    }
     
     }
     public static getInstance() : Methods {
@@ -77,11 +77,19 @@ export class Methods{
 
     }
 
-    public async AdminAccessRightTranslator() : Promise<void> {
+
+    public showTranslatorAccesses( ) :void {
 
         ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Englisch: ${TRANSLATOR.accessenglish} `);
         ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Spanisch: ${TRANSLATOR.accessspanish} `);
         ConsoleHandling.printInput(`Berechtigung von ${TRANSLATOR.translatorname} für Französich: ${TRANSLATOR.accessfrench} `);
+        ConsoleHandling.printInput(`\n`);
+
+    }
+
+    public async AdminAccessRightTranslator() : Promise<void> {
+
+        this.showTranslatorAccesses();        
 
         let question: String = await ConsoleHandling.question(`Berechtigung für ${TRANSLATOR.translatorname}  ändern? `);
 
@@ -169,66 +177,78 @@ export class Methods{
         
     }
 
-    public async WriteNewWord() : Promise<void> {
+    public async WriteNewWord(newWord: String) : Promise<void> {
 
-        let newWord: String = await ConsoleHandling.question('Wort eingeben: ');
+        let consent: String = await ConsoleHandling.question(`Möchtest du das Wort "${newWord}" neu anlegen?`);
         let fileHandler = new FileHandler();            
         let data = fileHandler.readJSON('../data/wordlist.json');
         let _nullWord : Word = new NullWord();
+
+        switch(consent.toLowerCase()){
+            case'ja':
+            case'j':  
+            {     
+                let newJSONWord = {
+                    GUID: GenerateUUIDv4(),
+                    english: _nullWord.getEnglishWord(),
+                    german: newWord,
+                    spanish: _nullWord.getSpanishWord(),
+                    french: _nullWord.getFrenchWord()
+                }                      
+                   
+                data.push(newJSONWord);
+                
+                ConsoleHandling.printInput('\n');
         
-        let newJSONWord = {
-                GUID: GenerateUUIDv4(),
-                english: _nullWord.getEnglishWord(),
-                german: newWord,
-                spanish: _nullWord.getSpanishWord(),
-                french: _nullWord.getFrenchWord()
-        }                      
-               
-        data.push(newJSONWord);
-        
-        ConsoleHandling.printInput('Neues Wort ist eingetragen');
-
-        this.CreateNewWordCounter();
-
-        fileHandler.writeFile('../data/new_wordlist.json', data)
-        worddb.showFunctionalities;
-
-        await worddb.showWordFunctionalities();
-
-    }
-
-
-    public async CreateNewWordCounter(): Promise<void> {   
-
-        this._countNewWord++;
-
-        if(this._countNewWord++ == 1) {
-
-        ConsoleHandling.printInput(`${ this._countNewWord } neues Wort ist angelegt`);
-
-        } else {
-        
-        ConsoleHandling.printInput(`${ this._countNewWord } Wörter sind neu angelegt`);
+                fileHandler.writeFile('../data/new_wordlist.json', data)
+                worddb.showFunctionalities;
+                this.showNewWordCounter();
+    
+                await worddb.showWordFunctionalities();
+            }
+            case'nein':
+            case'n': 
+            {
+            await worddb.showWordFunctionalities();
+            }
+            default:
+            worddb.showWordFunctionalities();
+            break;            
         }
-        
-        
+
     }
 
-    public async TranslationCounter(): Promise<void> {   
+    public async showTranslationCounter(): Promise<void> {   
 
         this._countTranslation++;
 
-        if(this._countTranslation == 1) {
+        if(this._countTranslation  == 1) {
 
-        ConsoleHandling.printInput(`${ this._countTranslation} Wort ist übersetzt`);
+        ConsoleHandling.printInput(`\nDu hast ein neues Wort angelegt.`);
 
         } else {
         
-        ConsoleHandling.printInput(`${ this._countTranslation } Wörter sind übersetzt`);
+        ConsoleHandling.printInput(`\nDu hast ${this._countTranslation} neue Wörter angelegt.`);
         }
         
         
     }
+
+    public showNewWordCounter(): void {   
+
+        this._countNewWord++;
+
+        if(this._countNewWord  == 1) {
+
+        ConsoleHandling.printInput(`Du hast ein neues Wort angelegt.`);
+
+        } else {
+        
+        ConsoleHandling.printInput(`Du hast ${this._countNewWord} neue Wörter angelegt.`);
+        }
+        
+    }
+
 
     public async showPercentageWithOutTranslation(): Promise<void>{
 
@@ -265,38 +285,49 @@ export class Methods{
 
     public async searchForTranslation() : Promise<void> {
 
-    let language : String = await ConsoleHandling.question('Welche Sprache? ');
-    let word : String = await ConsoleHandling.question('Welches Wort? ');
+        let language : String = await ConsoleHandling.question('Welche Sprache? ');
+        let word : String = await ConsoleHandling.question('Welches Wort? ');
 
-    let translation : AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];   
+        let translation : AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];   
 
-    ConsoleHandling.printInput('\n');
+        ConsoleHandling.printInput('\n');
 
-    translation  = translation !== undefined ? translation : new NullWord();
+        //translation  = translation !== undefined ? translation : new NullWord();
 
-    switch(language.toLowerCase()){
-        case'englisch':
-        case'eng':  
-        {     
-        ConsoleHandling.printInput('Eingabe: ' + word + '\nEnglisch: ' + translation.getEnglishWord().toString());
-        await worddb.showWordFunctionalities();
-        }
-        case'spanisch':
-        case'sp': 
-        {
-        ConsoleHandling.printInput('Eingabe: ' + word + '\nSpanisch: '+  translation.getSpanishWord().toString());
-        await worddb.showWordFunctionalities();
-        }
-        case'französich':
-        case'f': 
-        {
-        ConsoleHandling.printInput('Eingabe: ' + word + '\nFranzösisch: '+ translation.getFrenchWord().toString());
-        await worddb.showWordFunctionalities();
-        } 
+        if (translation !== undefined){
 
-    }worddb.showWordFunctionalities();
-   
-}
+            switch(language.toLowerCase()){
+                case'englisch':
+                case'eng':  
+                {     
+                ConsoleHandling.printInput('Eingabe: ' + word + '\nEnglisch: ' + translation.getEnglishWord().toString());
+                await worddb.showWordFunctionalities();
+                }
+                case'spanisch':
+                case'sp': 
+                {
+                ConsoleHandling.printInput('Eingabe: ' + word + '\nSpanisch: '+  translation.getSpanishWord().toString());
+                await worddb.showWordFunctionalities();
+                }
+                case'französich':
+                case'f': 
+                {
+                ConsoleHandling.printInput('Eingabe: ' + word + '\nFranzösisch: '+ translation.getFrenchWord().toString());
+                await worddb.showWordFunctionalities();
+                } 
+                default:
+                {
+                    worddb.showTranslatorFunctionalities();
+                }
+            }
+
+      
+        }else 
+            {
+                this.WriteNewWord(word);
+            }
+    
+    }
 
     public async setTranslationTranslator() : Promise<void> {
 
@@ -307,16 +338,13 @@ export class Methods{
 
         let inputword : String = await ConsoleHandling.question('Welches Wort? ');
 
-        
+        this.showTranslatorAccesses();        
 
         for(let index in this._words){
 
             if (inputword == this._words[index].getGermanWord().toString())
 
             {   let language : String = await ConsoleHandling.question('Welche Sprache? ');
-               
-                
-                
 
                 switch(language.toLowerCase())
                 {
@@ -329,9 +357,11 @@ export class Methods{
 
                             let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
 
-                                data[index].english = newTranslation;
+                            data[index].english = newTranslation;
                                
-                            fileHandler.writeFile('../data/wordlist.json', data)
+                            fileHandler.writeFile('../data/wordlist.json', data);
+
+                            await worddb.showTranslatorFunctionalities();
 
                         }else
                             {
@@ -343,7 +373,7 @@ export class Methods{
                     case'spanisch':
                     case'sp': 
                     {
-                        if (TRANSLATOR.accessspanish== true)
+                        if (TRANSLATOR.accessspanish == true)
                         {
 
                             let newTranslation : String = await ConsoleHandling.question('Neue Übersetzung: ');
@@ -351,6 +381,8 @@ export class Methods{
                             data[index].spanish = newTranslation;
                            
                             fileHandler.writeFile('../data/wordlist.json', data)
+
+                            await worddb.showTranslatorFunctionalities();
 
                         }else
                             {
@@ -371,6 +403,8 @@ export class Methods{
                            
                             fileHandler.writeFile('../data/wordlist.json', data)
 
+                            await worddb.showTranslatorFunctionalities();
+
 
                         }else
                             {
@@ -378,13 +412,16 @@ export class Methods{
                             await worddb.showTranslatorFunctionalities();
                             }   
                     }
+                     default:
+                    {
+                        worddb.showTranslatorFunctionalities();
+                        break;
+                    }
                 }
             }
-        }
+        }       
 
-        
-
-        this.TranslationCounter();
+        this.showTranslationCounter();
         worddb.showTranslatorFunctionalities();
     }
 
