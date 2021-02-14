@@ -19,7 +19,7 @@
 
 ## Hilfreiche Information für das Programm:
 
-**Admins Daten**:\
+**Admins**:\
 Username = admin123\
 Password = foever  
 
