@@ -1,35 +1,57 @@
-## Requirements
+## Voraussetzungen 
 
 - Node.js
 - Node Package Manager (npm)
-- Visual Studio Code or other IDE
+- Visual Studio Code oder other IDE
 
-## To get this to work:
+## Start des Programms:
 
-1. Download all files in this folder
-2. Open a console program, "cmd", "terminal" or something else
-3. Navigate to the root of this folder
-4. Type in "npm install" and press enter, node_modules will be installed now
-5. After installation of the node_modules, you can run the program now with "npm run start"
+1. Den Ordner herunterladen.
+2. Den Ordner in Visual Studio Codes öffnen und ins terminal oder cmd gehen.
+3. "npm install" eingeben und enter drücken => node_modules wird heruntergeladen.
+4. Nach dem Download von node_modules, "npm run start" im terminal/cmd eingeben.
+5. Das Programm startet.
 
-## How to debug the program in Visual Studio Code
+## Falls das Programm nicht startet.
 
-1. After installation of the node_modules, you can start debugging in Visual Studio Code via Debug tab on the left site
-2. If you have problems with this, check if launch.json and tasks.json are there in .vscode folder of the project
+1. Schaue nach, ob launch.json and tasks.json im Ordner ".vscode" liegen.
+2. Beim erneuten Download des Programms muss "npm install" immer eingeben. (siehe Start des Programms ab Schritt 2)
 
+## Hilfreiche Information für das Programms:
 
-## Die nächsten Schritte für das Programm:
+- **Admins Daten**:                     **Übersetzers**:
+    Username = admin123,                  Username = translator123,
+    Password = foever                     Password = whoever
+  
+- **Admins Funktionen**:
+  - Sprache neu anlegen: 
+    Die Sprache wird als Key mit dem Wert "Keine" für jedes Wort im wordlist.json gespeichert.
+    Die Sprache wird als Key mit dem eingegeben local-ID im language.json gespeichert.
+  - Sprache an Übersetzer zuweisen:
+    Erstmal wird die Berechtigung des Übersetzers angezeigt.
+    Man kann die Berechtigung einzelner Sprache ändern.
 
-- Login für verschiedenen Rollen( User, Übersetzer, Admin) ✔
-- Wörter (gezielt) in gewünschter Sprache übersetzen ✔
-- Nullobject Pattern für "Keine" Antworten ✔
-- Prozentuale Anteil der vorhandenen Übersetzungen vom jeden Wort codieren ✔
-- GUID in json Datei einschreiben ✔
-- neues Wort anlegen ✔
-- neue Sprache anlegen 
-- Übersetzer kann die Übersetzung einzelner Wörter vornehmen
-- Berechtigungen für den Übersetzer codieren ✔
-- alle Wörter mit Übersetzungen anzeigen ✔
-- Anzeige einer Liste mit fehlenden Übersetzungen codieren ✔
+- **Übersetzers Funktionen**:
+  - Alle Wörter in der aktuellen Datenbank anzeigen
+  - Auflistung fehlender Übersetzungen anzeigen: mindestens bei einer Sprache ohne Übersetzung
+  - Übersetzungen einpflegen/eintragen: Die Übersetzung wird beim ausgewählten Wort in   wordlist.json geändert. (Das Wort muss identisch mit dem Wort im wordlist.json sein)
+  - Anzahl der vorhandenen Wörter in der aktuellen Datenbank anzeigen
+  - Anzahl der angelegten Übersetzungen anzeigen
+  - Anzahl der neu angelegten Wörter anzeigen(Übersetzer)
+  - Prozentzahl der Übersetzungen einzelner Wörter anzeigen
+  - Zielsprache auswählen und übersetzen: 
+    Falls das Wort nicht in der Datenbank ist, kann man dieses Wort neu anlegen.
 
+- **Users Funktionen**:
 
+  - Alle Wörter in der aktuellen Datenbank anzeigen
+  - Zielsprache auswählen und übersetzen: 
+    Falls das Wort nicht in der Datenbank ist, kann man dieses Wort neu anlegen.
+  - Anzahl der neu angelegten Wörter anzeigen(User)
+  - Anzahl der Wörter in der aktuellen Datenbank anzeigen
+  - Alle Wörter mit allen Übersetzungen anzeigen
+
+###### **Wichtig**:
+Das Programm arbeitet immer mit der aktuellen Json Dateien.
+Falls neue Wörter ne uangelegt sind, sollte man das Programm neu starten
+, um das Wort zu verarbeiten.

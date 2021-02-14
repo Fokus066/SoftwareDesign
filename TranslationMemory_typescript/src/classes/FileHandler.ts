@@ -29,4 +29,22 @@ export class FileHandler
   fs.writeFileSync(path.resolve(__dirname, '../' + pathToFile), JSON.stringify(dataToWrite,null,2)); 
 
   }
+
+  public deletefile(pathToFile: string): void {
+
+    fs.stat(path.resolve(__dirname, '../' + pathToFile), function (err, stats) {
+      
+      console.log(stats);//here we got all information of file in stats variable
+   
+      if (err) {
+          return console.error(err);
+      }
+   
+      fs.unlink(path.resolve(__dirname, '../' + pathToFile),function(err){
+           if(err) return console.log(err);
+           console.log('file deleted successfully');
+      });  
+   });
+
+  }
 }
