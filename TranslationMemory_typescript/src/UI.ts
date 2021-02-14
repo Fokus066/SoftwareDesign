@@ -23,7 +23,7 @@ export class UI {
         '2. Sprache an Übersetzer zuweisen',
                
       ], 
-      'Was möchtest du machen?(Zahlen)');
+      'Was möchtest du machen?(default: abmelden)');
 
     await this.handleAdminChoices(answer);
   }
@@ -45,7 +45,7 @@ export class UI {
         '10. Abmelden',
                   
       ], 
-      'Was möchtest du machen? (default: zurück)');
+      'Was möchtest du machen? (default: Übersetzers Funktionen)');
 
     await this.handleTranslatorChoices(answer);
   }
@@ -54,6 +54,7 @@ export class UI {
   {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
+        'Users Funktionen:\n ',
         '1. Alle Wörter in der aktuellen Datenbank anzeigen',
         '2. Zielsprache auswählen und übersetzen',
         '3. Anzahl der neu angelegten Wörter anzeigen',
@@ -61,7 +62,7 @@ export class UI {
         '5. Alle Wörter mit 100% Übersetzungen anzeigen'
 
       ], 
-      'Welche Funktion möchtest du nutzen?(default: zurück): ');
+      'Welche Funktion möchtest du nutzen?(default: zurück) ');
 
     await this.handleUserChoice(answer);
   }
