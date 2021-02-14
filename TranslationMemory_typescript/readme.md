@@ -17,13 +17,17 @@
 1. Schaue nach, ob launch.json and tasks.json im Ordner ".vscode" liegen.
 2. Beim erneuten Download des Programms muss "npm install" immer eingeben. (siehe Start des Programms ab Schritt 2)
 
-## Hilfreiche Information für das Programms:
+## Hilfreiche Information für das Programm:
 
-- **Admins Daten**:                     **Übersetzers**:
-    Username = admin123,                  Username = translator123,
-    Password = foever                     Password = whoever
-  
-- **Admins Funktionen**:
+**Admins Daten**:
+Username = admin123
+Password = foever   
+
+**Übersetzers**:
+Username = translator123,
+Password = whoever
+
+**Admins Funktionen**:
   - Sprache neu anlegen: 
     Die Sprache wird als Key mit dem Wert "Keine" für jedes Wort im wordlist.json gespeichert.
     Die Sprache wird als Key mit dem eingegeben local-ID im language.json gespeichert.
@@ -31,7 +35,7 @@
     Erstmal wird die Berechtigung des Übersetzers angezeigt.
     Man kann die Berechtigung einzelner Sprache ändern.
 
-- **Übersetzers Funktionen**:
+**Übersetzers Funktionen**:
   - Alle Wörter in der aktuellen Datenbank anzeigen
   - Auflistung fehlender Übersetzungen anzeigen: mindestens bei einer Sprache ohne Übersetzung
   - Übersetzungen einpflegen/eintragen: Die Übersetzung wird beim ausgewählten Wort in   wordlist.json geändert. (Das Wort muss identisch mit dem Wort im wordlist.json sein)
@@ -42,7 +46,7 @@
   - Zielsprache auswählen und übersetzen: 
     Falls das Wort nicht in der Datenbank ist, kann man dieses Wort neu anlegen.
 
-- **Users Funktionen**:
+**Users Funktionen**:
 
   - Alle Wörter in der aktuellen Datenbank anzeigen
   - Zielsprache auswählen und übersetzen: 
@@ -51,7 +55,7 @@
   - Anzahl der Wörter in der aktuellen Datenbank anzeigen
   - Alle Wörter mit allen Übersetzungen anzeigen
 
-###### **Wichtig**:
+**Wichtig**:
 Das Programm arbeitet immer mit der aktuellen Json Dateien.
 Falls neue Wörter ne uangelegt sind, sollte man das Programm neu starten
 , um das Wort zu verarbeiten.
