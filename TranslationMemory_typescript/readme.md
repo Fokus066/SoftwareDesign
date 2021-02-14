@@ -28,11 +28,11 @@ Username = translator123\
 Password = whoever
 
 **Allgemeines**:\
-Der Übersetzer hat beim Programmstart nur die Berechtigung englische Wörter zu übersetzen.\ 
+Der Übersetzer hat beim Programmstart nur die Berechtigung englische Wörter zu übersetzen. 
 Um die Berechtigung für die Sprache Spanisch und Französisch zu ändern, muss man sich als Admin anmelden und die Funktion "Sprache an Übersetzer zuweisen" nutzen.<br/>
 
 Das Programm arbeitet immer mit den aktuellen Json Dateien.\
-Falls neue Wörter neu angelegt sind, sollte man das Programm neu starten, um das Wort zu verarbeiten.
+Falls neue Wörter angelegt sind, sollte man das Programm neu starten, um das Wort zu verarbeiten.
 
 
 **Admins Funktionen**:
@@ -62,7 +62,3 @@ Falls neue Wörter neu angelegt sind, sollte man das Programm neu starten, um da
   - Anzahl der neu angelegten Wörter anzeigen(User)
   - Anzahl der Wörter in der aktuellen Datenbank anzeigen
   - Alle Wörter mit allen Übersetzungen anzeigen
-
-**Wichtig**:\
-Das Programm arbeitet immer mit der aktuellen Json Dateien.\
-Falls neue Wörter ne uangelegt sind, sollte man das Programm neu starten, um das Wort zu verarbeiten.
