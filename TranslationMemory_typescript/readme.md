@@ -28,28 +28,28 @@ Username = translator123,\
 Password = whoever
 
 **Admins Funktionen**:
-  - Sprache neu anlegen:\ 
+  - Sprache neu anlegen:<br/>
     Die Sprache wird als Key mit dem Wert "Keine" für jedes Wort im wordlist.json gespeichert.\
     Die Sprache wird als Key mit dem eingegeben local-ID im language.json gespeichert.
-  - Sprache an Übersetzer zuweisen:\
+  - Sprache an Übersetzer zuweisen:<br/>
     Erstmal wird die Berechtigung des Übersetzers angezeigt.\
     Man kann die Berechtigung einzelner Sprache ändern.
 
 **Übersetzers Funktionen**:
   - Alle Wörter in der aktuellen Datenbank anzeigen
   - Auflistung fehlender Übersetzungen anzeigen: mindestens bei einer Sprache ohne Übersetzung
-  - Übersetzungen einpflegen/eintragen:\ Die Übersetzung wird beim ausgewählten Wort in wordlist.json geändert. (Das Wort muss identisch mit dem Wort im wordlist.json sein)
+  - Übersetzungen einpflegen/eintragen:<br/> Die Übersetzung wird beim ausgewählten Wort in wordlist.json geändert. (Das Wort muss identisch mit dem Wort im wordlist.json sein)
   - Anzahl der vorhandenen Wörter in der aktuellen Datenbank anzeigen
   - Anzahl der angelegten Übersetzungen anzeigen
   - Anzahl der neu angelegten Wörter anzeigen(Übersetzer)
   - Prozentzahl der Übersetzungen einzelner Wörter anzeigen
-  - Zielsprache auswählen und übersetzen:\ 
+  - Zielsprache auswählen und übersetzen:<br/> 
     Falls das Wort nicht in der Datenbank ist, kann man dieses Wort neu anlegen.
 
 **Users Funktionen**:
 
   - Alle Wörter in der aktuellen Datenbank anzeigen
-  - Zielsprache auswählen und übersetzen:\ 
+  - Zielsprache auswählen und übersetzen:<br/> 
     Falls das Wort nicht in der Datenbank ist, kann man dieses Wort neu anlegen.
   - Anzahl der neu angelegten Wörter anzeigen(User)
   - Anzahl der Wörter in der aktuellen Datenbank anzeigen
