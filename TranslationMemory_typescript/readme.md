@@ -55,7 +55,7 @@ Password = whoever
   - Anzahl der Wörter in der aktuellen Datenbank anzeigen
   - Alle Wörter mit allen Übersetzungen anzeigen
 
-**Wichtig**:
+**Wichtig**:\
 Das Programm arbeitet immer mit der aktuellen Json Dateien.
 Falls neue Wörter ne uangelegt sind, sollte man das Programm neu starten
 , um das Wort zu verarbeiten.
