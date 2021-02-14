@@ -321,7 +321,7 @@ export class Methods {
 
                     ConsoleHandling.printInput('\n');
 
-                    this._fileHandler.writeFile('../data/new_wordlist.json', this._wordData)
+                    this._fileHandler.writeFile('../data/wordlist.json', this._wordData)
 
                     if (this._TranslationSignedIn == true) {
                         this.showNewWordTranslatorCounter();
