@@ -121,7 +121,7 @@ export class UI {
       Methods.TranslatorSignOut();
         break;
       default:
-        this.showTranslatorFunctionalities();
+      this.showTranslatorFunctionalities();
         break;
     }
     await this.showFunctionalitiesAgain();
@@ -184,5 +184,6 @@ export class UI {
         this.showFunctionalities();
         break;
     }
+    await this.showFunctionalitiesAgain();
   }
 }

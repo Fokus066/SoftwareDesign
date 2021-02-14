@@ -98,8 +98,8 @@ export class Methods {
     public TranslatorSignOut(): void {
 
         this._TranslationSignedIn = false;
-        ConsoleHandling.printInput(`\n${TRANSLATOR.translatorname} ist abgemeldet\n`)
-
+        ConsoleHandling.printInput(`\n${TRANSLATOR.translatorname} ist abgemeldet\n`);
+    
     }
 
     public async AddnewLanguage(): Promise<void> {
@@ -348,7 +348,7 @@ export class Methods {
         }
     }
 
-    public showTranslationCounter(): void {
+    public  showTranslationCounter():  void{
 
         this._countTranslation++;
 
@@ -436,7 +436,7 @@ export class Methods {
     public async searchForTranslation(): Promise<void> {
 
         let language: String = await ConsoleHandling.question('Welche Sprache?(eng,sp,fr) ');
-        let word: String = await ConsoleHandling.question('Welches Wort? ');
+        let word: String = await ConsoleHandling.question('Welches Wort?: ');
         let onlyChar: RegExp = /^[a-zA-Z]+$/;
 
         let translation: AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];
@@ -492,14 +492,13 @@ export class Methods {
 
 
     }
-
     public async setTranslationTranslator(): Promise<void> {
 
         let onlyChar: RegExp = /^[a-zA-Z]+$/;
 
         this.showTranslatorAccesses();
 
-        let inputword: String = await ConsoleHandling.question('Welches Wort? ');
+        let inputword: String = await ConsoleHandling.question('Welches Wort(Achte auf Groß und Kleinschreibung wie in der Datenbank)? ');
 
 
         for (let index in this._words) {
@@ -564,7 +563,7 @@ export class Methods {
 
                         }
 
-                    case 'französich':
+                    case 'französisch':
                     case 'fr':
                         {
                             if (TRANSLATOR.accessfrench == true) {
