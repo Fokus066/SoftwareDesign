@@ -75,9 +75,6 @@ export class UI {
       case '2':
       Methods.AdminAccessRightTranslator();  
         break;
-      case '3':
-      Methods.showLanguage();  
-        break;
       default:
       this.showFunctionalities();
         break;

@@ -201,22 +201,6 @@ export class Methods {
 
     }
 
-
-    public async showLanguage(): Promise<void> {
-
-        let single: WordDAO = this._fileHandler.readObjectFile('../data/wordlist.json');
-        let language: Language = new Language(single);
-
-        ConsoleHandling.printInput(`
-        Englisch:    ${language.englishLCID}
-        Deutsch:     ${language.germanLCID}
-        Französisch: ${language.frenchLCID}
-        Spanisch:    ${language.spanishLCID}\n`);
-
-        await worddb.showAdminFunctionalities();
-        
-    }
-
     public async showAllWords(): Promise<void> {
 
         for (let index in this._words) {
