@@ -15,10 +15,15 @@ export class Methods {
     private static instance: Methods = new Methods()
 
     private _words: Word[] = [];
+    private _nullWord : Word = new NullWord();
+    private _wordData : any;
+    private _fileHandler: any;
     private _countNewWordUser = 0;
     private _countNewWordTranslator = 0;
     private _countTranslation = 0;
     private _TranslationSignedIn = false;
+    
+    
 
     constructor() {
 
@@ -27,7 +32,12 @@ export class Methods {
 
         let fileHandler = new FileHandler();
         let wordsJson: WordDAO[] = fileHandler.readArrayFile('../data/wordlist.json');
+        let data = fileHandler.readJSON('../data/wordlist.json');
+        let nullWord: Word = new NullWord();
 
+        this._wordData = data;
+        this._fileHandler = fileHandler;
+        this._nullWord = nullWord;
 
         for (let word of wordsJson) {
             this._words.push(new Word(word));
@@ -65,32 +75,31 @@ export class Methods {
 
     public async AddnewLanguage(): Promise<void> {
 
-        let fileHandler = new FileHandler();
-        let data = fileHandler.readJSON('../data/wordlist.json');
-        let _nullWord: Word = new NullWord();
+        
         let newLanguage: any = await ConsoleHandling.question('Neue Sprache: ');
         let onlyChar: RegExp = /^[a-zäöüA-ZÄÖÜ]+$/;
 
-        for (let index = 0; index < this._words.length; index++) {
+        for (let index in this._words) {
 
-            if (newLanguage !== Object.keys(data[index]) && onlyChar.test(`${newLanguage}`) == true) {
-                data[index][newLanguage] = _nullWord.getGermanWord();
-                fileHandler.writeFile('../data/wordlist.json', data);
-                ConsoleHandling.printInput(`\n ${newLanguage} ist als neue Sprache angelegt.`);
-                break;
+            if (newLanguage !== Object.keys(this._wordData[index]) && onlyChar.test(`${newLanguage}`) == true) {
+                this._wordData[index][newLanguage] = this._nullWord.getGermanWord();
+                this._fileHandler.writeFile('../data/wordlist.json', this._wordData);
+                
+                
             }
-            if (newLanguage == Object.keys(data[index]) || onlyChar.test(`${newLanguage}`) == false) {
+            if (newLanguage == Object.keys(this._wordData[index]) || onlyChar.test(`${newLanguage}`) == false) {
                 ConsoleHandling.printInput(`\n${newLanguage} kann nicht als Sprache gespeichert werden.`);
+                await worddb.showAdminFunctionalities();
                 break;
             }
         }
+        ConsoleHandling.printInput(`\n ${newLanguage} ist als neue Sprache angelegt.`);
         await worddb.showAdminFunctionalities();
     }
 
     public async showLanguage(): Promise<void> {
 
-        let fileHandler = new FileHandler();
-        let single: WordDAO = fileHandler.readObjectFile('../data/wordlist.json');
+        let single: WordDAO = this._fileHandler.readObjectFile('../data/wordlist.json');
         let language: Language = new Language(single);
         ConsoleHandling.printInput(`
         Englisch:    ${language.englishLCID}
@@ -187,16 +196,15 @@ export class Methods {
 
     public showAllWordsWithOutTranslations(): void {
 
-        let _nullWord: Word = new NullWord();
 
         for (let index in this._words) {
 
             let word: Word = this._words[index];
 
             if (
-                word.getEnglishWord().toString() == _nullWord.getEnglishWord() ||
-                word.getSpanishWord().toString() == _nullWord.getSpanishWord() ||
-                word.getFrenchWord().toString() == _nullWord.getFrenchWord()
+                word.getEnglishWord().toString() == this._nullWord.getEnglishWord() ||
+                word.getSpanishWord().toString() == this._nullWord.getSpanishWord() ||
+                word.getFrenchWord().toString() == this._nullWord.getFrenchWord()
             ) {
                 ConsoleHandling.printInput(` 
 
@@ -211,8 +219,6 @@ export class Methods {
     
     public  showAllWordsWithTranslations(): void {
 
-        let _nullWord: Word = new NullWord();
-
         ConsoleHandling.printInput(`\n`);
 
         for (let index in this._words) {
@@ -220,9 +226,9 @@ export class Methods {
             let word: Word = this._words[index];
 
             if (
-                word.getEnglishWord().toString() !== _nullWord.getEnglishWord() &&
-                word.getSpanishWord().toString() !== _nullWord.getSpanishWord() &&
-                word.getFrenchWord().toString() !== _nullWord.getFrenchWord()
+                word.getEnglishWord().toString() !== this._nullWord.getEnglishWord() &&
+                word.getSpanishWord().toString() !== this._nullWord.getSpanishWord() &&
+                word.getFrenchWord().toString() !== this._nullWord.getFrenchWord()
             ) {
                 ConsoleHandling.printInput(`${word.getGermanWord().toString()} :100% Übersetzung`);
             }
@@ -259,9 +265,6 @@ export class Methods {
     public async WriteNewWord(newWord: String): Promise<void> {
 
         let consent: String = await ConsoleHandling.question(`Möchtest du das Wort "${newWord}" neu anlegen?(ja oder nein):`);
-        let fileHandler = new FileHandler();
-        let data = fileHandler.readJSON('../data/wordlist.json');
-        let _nullWord: Word = new NullWord();
 
         switch (consent.toLowerCase()) {
             case 'ja':
@@ -269,17 +272,17 @@ export class Methods {
                 {
                     let newJSONWord = {
                         GUID: GenerateUUIDv4(),
-                        english: _nullWord.getEnglishWord(),
+                        english: this._nullWord.getEnglishWord(),
                         german: newWord,
-                        spanish: _nullWord.getSpanishWord(),
-                        french: _nullWord.getFrenchWord()
+                        spanish: this._nullWord.getSpanishWord(),
+                        french: this._nullWord.getFrenchWord()
                     }
 
-                    data.push(newJSONWord);
+                    this._wordData.push(newJSONWord);
 
                     ConsoleHandling.printInput('\n');
 
-                    fileHandler.writeFile('../data/wordlist.json', data)
+                    this._fileHandler.writeFile('../data/wordlist.json', this._wordData)
                    
                     if (this._TranslationSignedIn == true){
                         this.showNewWordTranslatorCounter();
@@ -363,27 +366,23 @@ export class Methods {
 
     public showPercentageWithOutTranslation():void {
 
-        let _nullWord: Word = new NullWord();
-        let fileHandler = new FileHandler();
-        let data = fileHandler.readJSON('../data/wordlist.json');
-
         for (let index in this._words) {
 
             let count: number;
             count = 0;
             let word: Word = this._words[index];
 
-            if (word.getEnglishWord().toString() == _nullWord.getEnglishWord()) {
+            if (word.getEnglishWord().toString() == this._nullWord.getEnglishWord()) {
                 count++;
             }
-            if (word.getSpanishWord().toString() == _nullWord.getSpanishWord()) {
+            if (word.getSpanishWord().toString() == this._nullWord.getSpanishWord()) {
                 count++;
             }
-            if (word.getFrenchWord().toString() == _nullWord.getFrenchWord()) {
+            if (word.getFrenchWord().toString() == this._nullWord.getFrenchWord()) {
                 count++;
             }
 
-            let percentage = (1 - count / (Object.keys(data[index]).length - 2)) * 100;
+            let percentage = (1 - count / (Object.keys(this._wordData[index]).length - 2)) * 100;
             let final = percentage.toFixed();
             ConsoleHandling.printInput(`${word.getGermanWord().toString()}: ${final} %`);
 
@@ -399,9 +398,6 @@ export class Methods {
 
         let translation: AbstractWord = this._words.filter((translation) => translation.getGermanWord().match(new RegExp(`${word}`, 'gi')))[0];
         ConsoleHandling.printInput('\n');
-
-        
-        
 
         if (translation !== undefined && onlyChar.test(`${word}`) == true && onlyChar.test(`${language}`) == true) {
 
@@ -456,8 +452,6 @@ export class Methods {
 
     public async setTranslationTranslator(): Promise<void> {
 
-        let fileHandler = new FileHandler();
-        let data = fileHandler.readJSON('../data/wordlist.json');
         let onlyChar: RegExp = /^[a-zA-Z]+$/;
 
         let inputword: String = await ConsoleHandling.question('Welches Wort? ');
@@ -480,8 +474,8 @@ export class Methods {
 
                                 if (onlyChar.test(`${newTranslation}`) == true) {
 
-                                    data[index].english = newTranslation;
-                                    fileHandler.writeFile('../data/wordlist.json', data);
+                                    this._wordData[index].english = newTranslation;
+                                    this._fileHandler.writeFile('../data/wordlist.json', this._wordData);
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
                                     break;
@@ -507,8 +501,8 @@ export class Methods {
 
                                 if (onlyChar.test(`${newTranslation}`) == true) {
 
-                                    data[index].spanish = newTranslation;
-                                    fileHandler.writeFile('../data/wordlist.json', data)
+                                    this._wordData[index].spanish = newTranslation;
+                                    this._fileHandler.writeFile('../data/wordlist.json', this._wordData)
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
                                     break;
@@ -534,8 +528,8 @@ export class Methods {
 
                                 if (onlyChar.test(`${newTranslation}`) == true) {
 
-                                    data[index].french = newTranslation;
-                                    fileHandler.writeFile('../data/wordlist.json', data);
+                                    this._wordData[index].french = newTranslation;
+                                    this._fileHandler.writeFile('../data/wordlist.json', this._wordData);
                                     this.showTranslationCounter();
                                     await worddb.showTranslatorFunctionalities();
                                     break;

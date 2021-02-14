@@ -10,7 +10,7 @@ export class UI {
         '1. Login',
         '2. Zu Users Funktionen',
       ], 
-      'Was möchtest du machen?(Zahlen): ');
+      'Was möchtest du machen?(Zahl): ');
 
     await this.handleAnswer(answer);
   }
@@ -166,7 +166,7 @@ export class UI {
    
   public async showFunctionalitiesAgain(): Promise<void>
    {
-    let answer : String = await ConsoleHandling.question('weitere Funktionen nutzen? ');
+    let answer : String = await ConsoleHandling.question('weitere Funktionen nutzen?(ja oder nein) ');
     switch(answer.toLowerCase()) {
       case 'ja':
       case 'j':
