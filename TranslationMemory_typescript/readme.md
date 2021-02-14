@@ -24,7 +24,7 @@ Username = admin123\
 Password = foever  
 
 **Übersetzers**:\
-Username = translator123,\
+Username = translator123\
 Password = whoever
 
 **Admins Funktionen**:
