@@ -21,11 +21,11 @@
 
 **Admins Daten**:\
 Username = admin123\
-Password = foever\   
+Password = foever  
 
 **Übersetzers**:\
 Username = translator123,\
-Password = whoever\
+Password = whoever
 
 **Admins Funktionen**:
   - Sprache neu anlegen: 
