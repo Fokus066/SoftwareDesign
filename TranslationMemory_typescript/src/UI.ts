@@ -21,7 +21,7 @@ export class UI {
       ['Admins Funktionen: ',
         '1. Neue Sprache anlegen',
         '2. Sprache an Übersetzer zuweisen',
-        '3. local-ID', 
+        '3. local-ID der Sprache anzeigen', 
                
       ], 
       'Was möchtest du machen?(Zahlen)');
@@ -34,14 +34,14 @@ export class UI {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
         'Übersetzers Funktionen:\n ',
-        '1. Alle Wörter anzeigen',
-        '2. Auflistung fehlender Übersetzungen Übersetzungen eintragen',
-        '3. Anzahl der vorhandenen Wörter anzeigen',
-        '4. Anzahl der angelegten Übersetzungen anzeigen',
-        '5. Anzahl der neu angelegten Wörter anzeigen',
-        '6. Prozentzahl der Übersetzungen eines Wortes anzeigen',
-        '7. Zielsprache auswählen und übersetzen',
-        '8. Übersetzungen einpflegen',
+        '1. Alle Wörter in der aktuellen Datenbank anzeigen',
+        '2. Auflistung fehlender Übersetzungen anzeigen',
+        '3. Übersetzungen einpflegen/eintragen',
+        '4. Anzahl der vorhandenen Wörter in der aktuellen Datenbank anzeigen',
+        '5. Anzahl der angelegten Übersetzungen anzeigen',
+        '6. Anzahl der neu angelegten Wörter anzeigen',
+        '7. Prozentzahl der Übersetzungen eines Wortes anzeigen',
+        '8. Zielsprache auswählen und übersetzen',
         '9. Abmelden'
                   
       ], 
@@ -54,11 +54,11 @@ export class UI {
   {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
-        '1. Alle Wörter anzeigen',
+        '1. Alle Wörter ain der aktuellen Datenbank anzeigen',
         '2. Zielsprache auswählen und übersetzen',
         '3. Anzahl der neu angelegten Wörter anzeigen',
-        '4. Anzahl der Wörter im Datenbank anzeigen',
-        '5. Alle Wörter mit allen Übersetzungen zeigen'
+        '4. Anzahl der Wörter in der aktuellen Datenbank anzeigen',
+        '5. Alle Wörter mit allen Übersetzungen anzeigen'
 
       ], 
       'Welche Funktion möchtest du nutzen?: ');
@@ -95,22 +95,22 @@ export class UI {
       Methods.showAllWordsWithOutTranslations();
         break;
       case '3':
-      Methods.showNumberofAllWords();  
+      Methods.setTranslationTranslator(); 
         break;
       case '4':
-      Methods.showNumberofTranslation();
+      Methods.showNumberofAllWords();  
         break;
       case '5':
+      Methods.showNumberofTranslation();
+        break;
+      case '6':
       Methods.showNumberofNewWordTranslator();
         break;
-       case '6':
+      case '7':
       Methods.showPercentageWithOutTranslation(); 
         break;
-      case '7':
-      Methods.searchForTranslation();
-        break;
       case '8':
-      Methods.setTranslationTranslator(); 
+      Methods.searchForTranslation();
         break;
       case '9':
       Methods.TranslatorSignOut();
@@ -121,7 +121,6 @@ export class UI {
     }
     await this.showFunctionalitiesAgain();
   } 
-
 
   public async handleAnswer(answer: String)
    {
@@ -166,15 +165,16 @@ export class UI {
    
   public async showFunctionalitiesAgain(): Promise<void>
    {
-    let answer : String = await ConsoleHandling.question('weitere Funktionen nutzen?(ja oder nein) ');
+    let answer : String = await ConsoleHandling.question('Programm beenden? (ja oder nein) ');
     switch(answer.toLowerCase()) {
       case 'ja':
       case 'j':
-        this.showFunctionalities();
+        Methods.deleteUserNewWord()
+        ConsoleHandling.closeConsole();
         break;
       case 'nein':
       case 'n':
-        ConsoleHandling.closeConsole()
+        this.showFunctionalities();
         break;
       default:
         this.showFunctionalities();
