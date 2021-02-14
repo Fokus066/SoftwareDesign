@@ -2,7 +2,7 @@ import { WordDAO } from "../types/WordDAO.type";
 import { Word} from "../classes/Word";
 
 
-export class Language extends Word {
+export class Language {
 
     private _germanLCID : String; 
     private _spanishLCID: String;
@@ -12,7 +12,6 @@ export class Language extends Word {
   
    constructor(word: WordDAO){
 
-    super(word);
     this._englishLCID = word.english;
     this._germanLCID = word.german;
     this._spanishLCID= word.spanish;
