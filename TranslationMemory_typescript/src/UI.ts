@@ -21,7 +21,6 @@ export class UI {
       ['Admins Funktionen: ',
         '1. Neue Sprache anlegen',
         '2. Sprache an Übersetzer zuweisen',
-        '3. local-ID der Sprache anzeigen', 
                
       ], 
       'Was möchtest du machen?(Zahlen)');
@@ -42,7 +41,8 @@ export class UI {
         '6. Anzahl der neu angelegten Wörter anzeigen',
         '7. Prozentzahl der Übersetzungen eines Wortes anzeigen',
         '8. Zielsprache auswählen und übersetzen',
-        '9. Abmelden'
+        '9. Alle Wörter mit 100% Übersetzungen anzeigen',
+        '10. Abmelden',
                   
       ], 
       'Was möchtest du machen? (default: zurück)');
@@ -54,14 +54,14 @@ export class UI {
   {
     let answer : String = await ConsoleHandling.showPossibilities(
       [
-        '1. Alle Wörter ain der aktuellen Datenbank anzeigen',
+        '1. Alle Wörter in der aktuellen Datenbank anzeigen',
         '2. Zielsprache auswählen und übersetzen',
         '3. Anzahl der neu angelegten Wörter anzeigen',
         '4. Anzahl der Wörter in der aktuellen Datenbank anzeigen',
-        '5. Alle Wörter mit allen Übersetzungen anzeigen'
+        '5. Alle Wörter mit 100% Übersetzungen anzeigen'
 
       ], 
-      'Welche Funktion möchtest du nutzen?: ');
+      'Welche Funktion möchtest du nutzen?(default: zurück): ');
 
     await this.handleUserChoice(answer);
   }
@@ -110,10 +110,13 @@ export class UI {
       Methods.searchForTranslation();
         break;
       case '9':
+      Methods.showAllWordsWithTranslations();
+        break;
+      case '10':
       Methods.TranslatorSignOut();
         break;
       default:
-        this.showFunctionalities();
+        this.showTranslatorFunctionalities();
         break;
     }
     await this.showFunctionalitiesAgain();
@@ -151,10 +154,10 @@ export class UI {
       Methods.showNumberofAllWords();
         break;
       case '5':
-        Methods.showAllWordsWithTranslations();
+      Methods.showAllWordsWithTranslations();
         break;
       default:
-        this.showFunctionalities();
+      this.showFunctionalities();
         break;
     }
     await this.showFunctionalitiesAgain();
@@ -166,7 +169,6 @@ export class UI {
     switch(answer.toLowerCase()) {
       case 'ja':
       case 'j':
-        Methods.deleteUserNewWord()
         ConsoleHandling.closeConsole();
         break;
       case 'nein':

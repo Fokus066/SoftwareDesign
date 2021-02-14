@@ -8,7 +8,6 @@ import { ADMIN } from '../main';
 import { TRANSLATOR } from '../main';
 import { worddb } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
-import { Language } from '../classes/Language';
 
 export class Methods {
 
@@ -211,17 +210,15 @@ export class Methods {
             word = word !== undefined ? word : new NullWord();
 
             ConsoleHandling.printInput(`
-           
             ${_index}.
             Deutsch: ${word.getGermanWord().toString()} 
             Englisch: ${word.getEnglishWord().toString()}
             Spanisch: ${word.getSpanishWord().toString()}
             Französich: ${word.getFrenchWord().toString()}
-            \n`);
+            `);
 
         }
-
-        await worddb.showFunctionalitiesAgain();
+        this.TranslatorOrUser();
 
     }
 
@@ -243,6 +240,15 @@ export class Methods {
             }
         }
         ConsoleHandling.printInput(`\n`);
+
+        if (this._TranslationSignedIn == true){
+
+            worddb.showTranslatorFunctionalities();
+        }
+        else if(this._TranslationSignedIn == false){
+
+            worddb.showUserFunctionalities();
+        }
     }
 
     public showAllWordsWithOutTranslations(): void {
@@ -258,13 +264,14 @@ export class Methods {
                 word.getFrenchWord().toString() == this._nullWord.getFrenchWord()
             ) {
                 ConsoleHandling.printInput(` 
-
                 Deutsch: ${word.getGermanWord().toString()} 
                 Englisch: ${word.getEnglishWord().toString()}
                 Spanisch: ${word.getSpanishWord().toString()}
                 Französich: ${word.getFrenchWord().toString()}`);
             }
         }
+
+        this.TranslatorOrUser();
     }
 
 
@@ -272,7 +279,8 @@ export class Methods {
 
         ConsoleHandling.printInput(`\n`);
         console.log(`Es sind insgesamt ${this._words.length} Wörter in der Datenbank.`);
-        worddb.showUserFunctionalities();
+
+        this.TranslatorOrUser();
 
     }
 
@@ -317,11 +325,12 @@ export class Methods {
 
                     if (this._TranslationSignedIn == true) {
                         this.showNewWordTranslatorCounter();
+                        this.TranslatorOrUser();
                     }
                     else if (this._TranslationSignedIn == false) {
-                        this.showNewWordUserCounter()
+                        this.showNewWordUserCounter();
+                        this.TranslatorOrUser();
                     }
-                    worddb.showFunctionalities();
                     break;
 
 
@@ -329,19 +338,13 @@ export class Methods {
             case 'nein':
             case 'n':
                 {
-                    worddb.showFunctionalitiesAgain();
+                    this.TranslatorOrUser();
                     break;
                 }
             default:
                 {
-                    if (this._TranslationSignedIn == false) {
-                        await worddb.showUserFunctionalities();
-                        break;
-                    }
-                    else {
-                        await worddb.showTranslatorFunctionalities();
-                        break;
-                    }
+                    this.TranslatorOrUser();
+                    break;
                 }
         }
     }
@@ -383,7 +386,9 @@ export class Methods {
             ConsoleHandling.printInput(`${word.getGermanWord().toString()}: ${final} %`);
 
         }
+        this.TranslatorOrUser();
     }
+
     public showNewWordTranslatorCounter(): void {
 
         this._countNewWordTranslator++;
@@ -417,6 +422,18 @@ export class Methods {
         worddb.showUserFunctionalities();
     }
 
+    public TranslatorOrUser(): void {
+
+        if (this._TranslationSignedIn == true){
+
+            worddb.showTranslatorFunctionalities();
+        }
+        else if(this._TranslationSignedIn == false){
+
+            worddb.showUserFunctionalities();
+        }
+    }
+
     public async searchForTranslation(): Promise<void> {
 
         let language: String = await ConsoleHandling.question('Welche Sprache?(eng,sp,fr) ');
@@ -433,7 +450,7 @@ export class Methods {
                 case 'eng':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Englisch: ' + translation.getEnglishWord().toString());
-                        worddb.showUserFunctionalities();
+                        this.TranslatorOrUser();
                         break;
 
                     }
@@ -441,7 +458,7 @@ export class Methods {
                 case 'sp':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Spanisch: ' + translation.getSpanishWord().toString());
-                        worddb.showUserFunctionalities();
+                        this.TranslatorOrUser();
                         break;
 
                     }
@@ -449,13 +466,13 @@ export class Methods {
                 case 'fr':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Französisch: ' + translation.getFrenchWord().toString());
-                        worddb.showUserFunctionalities();
+                        this.TranslatorOrUser();
                         break;
 
                     }
                 default:
                     {
-                        worddb.showUserFunctionalities();
+                        this.TranslatorOrUser();
                         break;
 
                     }
@@ -481,9 +498,10 @@ export class Methods {
 
         let onlyChar: RegExp = /^[a-zA-Z]+$/;
 
+        this.showTranslatorAccesses();
+
         let inputword: String = await ConsoleHandling.question('Welches Wort? ');
 
-        this.showTranslatorAccesses();
 
         for (let index in this._words) {
 
@@ -580,15 +598,10 @@ export class Methods {
                         }
                 }
             }
+            
         }
-
+        ConsoleHandling.printInput(`Das Wort "${inputword}" ist nicht in der Datenbank.`)
         worddb.showTranslatorFunctionalities();
-    }
-
-    public deleteUserNewWord(): void {
-
-        this._fileHandler.deletefile('../data/new_wordlist.json');
-
     }
 
 }
