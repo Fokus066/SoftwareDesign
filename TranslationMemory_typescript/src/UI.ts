@@ -21,6 +21,7 @@ export class UI {
       ['Admins Funktionen: ',
         '1. Neue Sprache anlegen',
         '2. Sprache an Übersetzer zuweisen',
+        '3. abmelden',
                
       ], 
       'Was möchtest du machen?(default: Admins Funktionen)');
@@ -76,9 +77,12 @@ export class UI {
       case '2':
       Methods.AdminAccessRightTranslator();  
         break;
+      case '3':
+      this.showFunctionalities;  
+      break;
       default:
       this.showAdminFunctionalities();
-        break;
+      break;
     }
     await this.showFunctionalitiesAgain();
   } 
@@ -158,7 +162,7 @@ export class UI {
       Methods.showAllWordsWithTranslations();
         break;
       default:
-      this.showFunctionalities();
+      this.showFunctionalitiesAgain();
         break;
     }
     await this.showFunctionalitiesAgain();
