@@ -4,9 +4,7 @@ import { NullWord } from './NullWord';
 import { FileHandler } from './FileHandler';
 import { WordDAO } from '../types/WordDAO.type';
 import { AbstractWord } from './abstracts/AbstractWord';
-import { ADMIN } from '../main';
-import { TRANSLATOR } from '../main';
-import { worddb } from '../main';
+import { ADMIN,TRANSLATOR,worddb  } from '../main';
 import { GenerateUUIDv4 } from '../classes/uuid/GenerateUuid';
 
 export class Methods {
@@ -33,6 +31,7 @@ export class Methods {
         let data = fileHandler.readJSON('../data/wordlist.json');
         let language = fileHandler.readJSON('../data/language.json');
         let nullWord: Word = new NullWord();
+        
 
         this._wordData = data;
         this._fileHandler = fileHandler;
