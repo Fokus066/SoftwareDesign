@@ -19,13 +19,13 @@
 
 ## Hilfreiche Information für das Programm:
 
-**Admins Daten**:
-Username = admin123
-Password = foever   
+**Admins Daten**:\
+Username = admin123\
+Password = foever\   
 
-**Übersetzers**:
-Username = translator123,
-Password = whoever
+**Übersetzers**:\
+Username = translator123,\
+Password = whoever\
 
 **Admins Funktionen**:
   - Sprache neu anlegen: 
