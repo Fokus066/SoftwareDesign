@@ -23,7 +23,7 @@ export class UI {
         '2. Sprache an Übersetzer zuweisen',
                
       ], 
-      'Was möchtest du machen?(default: abmelden)');
+      'Was möchtest du machen?(default: Admins Funktionen)');
 
     await this.handleAdminChoices(answer);
   }
@@ -77,7 +77,7 @@ export class UI {
       Methods.AdminAccessRightTranslator();  
         break;
       default:
-      this.showFunctionalities();
+      this.showAdminFunctionalities();
         break;
     }
     await this.showFunctionalitiesAgain();
