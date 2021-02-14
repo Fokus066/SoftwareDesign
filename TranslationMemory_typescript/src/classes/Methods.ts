@@ -170,7 +170,7 @@ export class Methods {
                                 await this.AdminAccessRightTranslator();
                                 break;
                             }
-                        case 'französich':
+                        case 'französisch':
                         case 'fr':
                             {
                                 TRANSLATOR.accessfrench = (TRANSLATOR.accessfrench) ? false : true;
@@ -213,7 +213,7 @@ export class Methods {
             Deutsch: ${word.getGermanWord().toString()} 
             Englisch: ${word.getEnglishWord().toString()}
             Spanisch: ${word.getSpanishWord().toString()}
-            Französich: ${word.getFrenchWord().toString()}
+            Französisch: ${word.getFrenchWord().toString()}
             `);
 
         }
@@ -266,7 +266,7 @@ export class Methods {
                 Deutsch: ${word.getGermanWord().toString()} 
                 Englisch: ${word.getEnglishWord().toString()}
                 Spanisch: ${word.getSpanishWord().toString()}
-                Französich: ${word.getFrenchWord().toString()}`);
+                Französisch: ${word.getFrenchWord().toString()}`);
             }
         }
 
@@ -461,7 +461,7 @@ export class Methods {
                         break;
 
                     }
-                case 'französich':
+                case 'französisch':
                 case 'fr':
                     {
                         ConsoleHandling.printInput('Eingabe: ' + word + ' Französisch: ' + translation.getFrenchWord().toString());
