@@ -27,12 +27,13 @@ Password = foever
 Username = translator123\
 Password = whoever
 
-**Allgemeines**:\
+**Beachte**:\
 Der Übersetzer hat beim Programmstart nur die Berechtigung englische Wörter zu übersetzen. 
-Um die Berechtigung für die Sprache Spanisch und Französisch zu ändern, muss man sich als Admin anmelden und die Funktion "Sprache an Übersetzer zuweisen" nutzen.<br/>
+Um die Berechtigung für die Sprache Spanisch und Französisch zu ändern, muss man sich als Admin anmelden und die Funktion "Sprache an Übersetzer zuweisen" nutzen.\
+Der Übersetzer kann die Wörter nur für die Sprache Englisch, Spanisch und Französisch verarbeiten.<br/>
 
 Das Programm arbeitet immer mit den aktuellen Json Dateien.\
-Falls neue Wörter angelegt sind, sollte man das Programm neu starten, um das Wort zu verarbeiten.
+Falls neue Wörter angelegt sind, sollte man das Programm neu starten, um das Wort zu verarbeiten.\
 
 
 **Admins Funktionen**:
